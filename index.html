@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#120c08">
+<title>Feeling Hungry — Himalayan & Chinese Cafe</title>
+
+<!-- Modern High-End Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- 3D & Animation Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+/* ==========================================================================
+   Himalayan & Chinese Cafe Theme (Warm Woods, Terracotta, Chili Red & Bamboo)
+   ========================================================================== */
+:root {
+  /* Warm Earthy & Himalayan Palette */
+  --bg-dark: #120c08;
+  --bg-teak: #1a120c;
+  --bg-timber: #241911;
+  --panel-wood: rgba(28, 19, 13, 0.72);
+  --panel-wood-hover: rgba(38, 25, 17, 0.88);
+  --panel-wood-solid: #21160f;
+  
+  /* Vibrant Himalayan Accents */
+  --terracotta: #c85a32;
+  --terracotta-bright: #d9693f;
+  --terracotta-glow: rgba(200, 90, 50, 0.35);
+  --chili-red: #d90429;
+  --chili-crimson: #a61c1c;
+  --chili-glow: rgba(217, 4, 41, 0.35);
+  --bamboo-gold: #d4a373;
+  --bamboo-light: #e9c46a;
+  --bamboo-green: #489762;
+  --saffron: #f4a261;
+  --warm-steam: #faedcd;
+
+  /* Glassmorphism & Metallic Borders */
+  --border-brass: rgba(212, 163, 115, 0.22);
+  --border-brass-bright: rgba(233, 196, 106, 0.65);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  /* Typography Colors */
+  --text-primary: #fdfaf6;
+  --text-secondary: #d6c7b7;
+  --text-muted: #9c8976;
+
+  /* Fonts & Physics */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --shadow-warm: 0 16px 40px rgba(0, 0, 0, 0.65);
+  --shadow-terracotta: 0 8px 30px rgba(200, 90, 50, 0.3);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 130px;
+  background-color: var(--bg-dark);
+}
+
+body {
+  margin: 0;
+  padding-bottom: 120px;
+  background: radial-gradient(circle at 50% 0%, #291a11 0%, #1c130b 45%, var(--bg-dark) 95%);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 3D WebGL Background Canvas */
+#webgl-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
+}
+
+/* Warm Lantern Atmosphere */
+.warm-atmosphere {
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 45% at 50% -10%, rgba(200, 90, 50, 0.18), transparent 70%),
+    radial-gradient(circle 500px at 90% 25%, rgba(233, 196, 106, 0.08), transparent 75%),
+    radial-gradient(circle 600px at 10% 75%, rgba(217, 4, 41, 0.08), transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Cursor Ember Glow (Desktop only) */
+.cursor-aura {
+  position: fixed;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 90, 50, 0.08) 0%, rgba(233, 196, 106, 0.03) 40%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+/* Content Container */
+.shell {
+  width: min(100%, 1200px);
+  margin: auto;
+  padding: 0 16px;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding: 0 24px;
+  }
+}
+
+/* ==========================================================================
+   Header & Cafe Logo Core
+   ========================================================================== */
+.hero {
+  text-align: center;
+  padding: 34px 0 20px;
+  position: relative;
+}
+
+.brand-core {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.logo-container {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+.logo-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 30px;
+  background: radial-gradient(circle, var(--terracotta-bright), var(--chili-red), transparent 70%);
+  filter: blur(12px);
+  opacity: 0.6;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #2b1c13, #160e08);
+  border: 1px solid var(--border-brass-bright);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-cinematic), border-color 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05) rotate(2deg);
+  border-color: var(--bamboo-light);
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.brand-title span {
+  background: linear-gradient(135deg, var(--chili-red) 0%, var(--terracotta-bright) 60%, var(--bamboo-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bamboo-gold);
+  margin: 8px 0 0;
+  font-weight: 600;
+}
+
+.cafe-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border-brass);
+  background: var(--panel-wood);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-secondary);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.badge-pill:hover {
+  border-color: var(--terracotta);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.badge-pill b {
+  color: var(--bamboo-light);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Sticky Hub: Search & Category Strip
+   ========================================================================== */
+.sticky-hub {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(18, 12, 8, 0.82);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(212, 163, 115, 0.18);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
+  padding: 12px 0 8px;
+}
+
+.searchbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(30, 20, 14, 0.85);
+  border: 1px solid rgba(212, 163, 115, 0.22);
+  border-radius: 16px;
+  padding: 0 16px;
+  height: 48px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+}
+
+.searchbox:focus-within {
+  border-color: var(--terracotta-bright);
+  background: rgba(38, 26, 18, 0.95);
+  box-shadow: 0 0 20px rgba(200, 90, 50, 0.35);
+}
+
+.searchbox .search-icon {
+  font-size: 1.1rem;
+  color: var(--bamboo-gold);
+}
+
+.searchbox input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--text-primary);
+  width: 100%;
+  font-size: 0.92rem;
+  font-family: var(--font-body);
+}
+
+.searchbox input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Category Strip */
+.category-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-btn {
+  white-space: nowrap;
+  border: 1px solid var(--border-brass);
+  border-radius: 100px;
+  background: rgba(32, 22, 15, 0.65);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  font-size: 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s var(--ease-cinematic);
+}
+
+.cat-btn:hover {
+  background: rgba(46, 31, 21, 0.85);
+  border-color: var(--terracotta);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.cat-btn.active {
+  background: linear-gradient(135deg, var(--chili-red), var(--terracotta));
+  border-color: var(--chili-red);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 18px rgba(217, 4, 41, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
+.menu-section {
+  margin-bottom: 46px;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212, 163, 115, 0.14);
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.2vw, 1.85rem);
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-head p {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+
+.section-count {
+  font-size: 0.78rem;
+  font-family: var(--font-display);
+  color: var(--bamboo-gold);
+  font-weight: 600;
+  background: rgba(32, 22, 15, 0.6);
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid var(--border-brass);
+}
+
+/* ==========================================================================
+   MATRIX (GRID) LAYOUT - Responsive & Zero Lag
+   ========================================================================== */
+.items-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 580px) {
+  .items-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (min-width: 920px) {
+  .items-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+/* ==========================================================================
+   Food Card with Smooth Antigravity Levitation & Warm Wood Aesthetic
+   ========================================================================== */
+.item-card {
+  background: linear-gradient(135deg, rgba(35, 24, 16, 0.78) 0%, rgba(20, 14, 9, 0.88) 100%);
+  border: 1px solid rgba(212, 163, 115, 0.2);
+  border-radius: 20px;
+  padding: 18px;
+  position: relative;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  will-change: transform;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.item-card:hover {
+  border-color: var(--bamboo-gold);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(200, 90, 50, 0.25);
+}
+
+/* Subtle Cursor Reflection (Desktop only) */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.item-card:hover .card-glare {
+  opacity: 1;
+}
+
+.card-top {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.food-icon-circle {
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #3d2719, #1c110a);
+  border: 1px solid var(--border-brass);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s var(--ease-spring);
+}
+
+.item-card:hover .food-icon-circle {
+  transform: scale(1.08) rotate(-3deg);
+  border-color: var(--terracotta);
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-badge {
+  font-size: 0.65rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(200, 90, 50, 0.15);
+  border: 1px solid rgba(200, 90, 50, 0.3);
+  color: var(--saffron);
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.item-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.item-desc {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Pizza Size Selector */
+.pizza-sizes {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.size-btn {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border-brass);
+  background: rgba(20, 14, 9, 0.7);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.size-btn:hover {
+  color: #fff;
+  border-color: var(--bamboo-gold);
+}
+
+.size-btn.selected {
+  background: linear-gradient(135deg, var(--chili-red), var(--terracotta));
+  border-color: var(--chili-red);
+  color: #fff;
+  box-shadow: 0 0 10px var(--chili-glow);
+}
+
+/* Card Bottom: Price & Add Stepper */
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid rgba(212, 163, 115, 0.1);
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-box .from {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.price-tag {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.add-btn {
+  background: linear-gradient(135deg, #fff2e0, var(--bamboo-light));
+  color: #1a110a;
+  border: 1px solid var(--bamboo-gold);
+  border-radius: 12px;
+  padding: 8px 18px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s var(--ease-spring);
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, var(--bamboo-light), var(--saffron));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--terracotta-glow);
+}
+
+.add-btn:active {
+  transform: scale(0.96);
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border-brass);
+  background: rgba(20, 14, 9, 0.9);
+  border-radius: 12px;
+  padding: 4px 6px;
+}
+
+.qty-control button {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--chili-red), var(--terracotta));
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease;
+}
+
+.qty-control button:active {
+  transform: scale(0.9);
+}
+
+.qty-control span {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  min-width: 14px;
+  text-align: center;
+  color: #fff;
+}
+
+/* ==========================================================================
+   Floating Bottom Cart & Checkout Drawer
+   ========================================================================== */
+.bottom-cart {
+  position: fixed;
+  z-index: 120;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, transparent 0%, rgba(18, 12, 8, 0.85) 30%, rgba(18, 12, 8, 0.98) 100%);
+  pointer-events: none;
+}
+
+.cart-button {
+  pointer-events: auto;
+  width: min(100%, 760px);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid rgba(233, 196, 106, 0.4);
+  border-radius: 20px;
+  background: linear-gradient(100deg, var(--terracotta) 0%, #c43d1a 50%, var(--chili-red) 100%);
+  color: #fff;
+  padding: 13px 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75), 0 0 25px var(--terracotta-glow);
+  font-family: var(--font-display);
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-cinematic);
+}
+
+.cart-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 35px var(--chili-glow);
+}
+
+.cart-button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.cart-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(20, 13, 8, 0.65);
+  color: var(--bamboo-light);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.cart-copy strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.cart-copy small {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.cart-total-badge {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* Modal Drawer */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 5, 3, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 200;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.cart-panel {
+  width: min(100%, 680px);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #241810 0%, #170f0a 100%);
+  border: 1px solid var(--border-brass-bright);
+  border-radius: 28px 28px 0 0;
+  padding: 24px 20px calc(20px + env(safe-area-inset-bottom));
+  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.85);
+  animation: panelSlideUp 0.3s var(--ease-cinematic);
+}
+
+@keyframes panelSlideUp {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(212, 163, 115, 0.12);
+}
+
+.panel-head h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-brass);
+  border-radius: 10px;
+  background: rgba(35, 23, 15, 0.8);
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.cart-items {
+  display: grid;
+  gap: 10px;
+}
+
+.cart-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 163, 115, 0.08);
+}
+
+.cart-line-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-line-main strong {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  display: block;
+  color: #fff;
+}
+
+.cart-line-main small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.line-total {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--bamboo-light);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 42px 18px;
+  color: var(--text-muted);
+  border: 1px dashed rgba(212, 163, 115, 0.16);
+  border-radius: 16px;
+  font-family: var(--font-display);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  color: var(--bamboo-gold);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.field input, .field textarea, .field select {
+  width: 100%;
+  border: 1px solid rgba(212, 163, 115, 0.22);
+  background: rgba(18, 12, 8, 0.85);
+  border-radius: 12px;
+  color: var(--text-primary);
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--terracotta-bright);
+  box-shadow: 0 0 15px var(--terracotta-glow);
+}
+
+.field textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.returning-welcome {
+  grid-column: 1 / -1;
+  padding: 10px 14px;
+  border: 1px solid rgba(233, 196, 106, 0.35);
+  border-radius: 12px;
+  background: rgba(233, 196, 106, 0.1);
+  color: var(--bamboo-light);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.bill {
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid rgba(212, 163, 115, 0.1);
+  border-radius: 16px;
+  background: rgba(18, 12, 8, 0.75);
+}
+
+.bill-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.bill-row.total {
+  border-top: 1px solid rgba(212, 163, 115, 0.14);
+  padding-top: 10px;
+  margin-top: 10px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.checkout-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--terracotta), var(--chili-red));
+  color: #fff;
+  padding: 15px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-top: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(217, 4, 41, 0.35);
+  transition: all 0.25s var(--ease-spring);
+}
+
+.checkout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(217, 4, 41, 0.5);
+}
+
+.checkout-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.note {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 12px 4px 0;
+  text-align: center;
+}
+
+.toast {
+  position: fixed;
+  z-index: 300;
+  left: 50%;
+  bottom: 90px;
+  transform: translate(-50%, 20px);
+  background: linear-gradient(135deg, #fff3e6, var(--bamboo-light));
+  color: #170f09;
+  padding: 10px 20px;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s var(--ease-spring);
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 24px 0 10px;
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 600px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .field.notes { grid-column: 1 / -1; }
+  .overlay { align-items: center; padding: 20px; }
+  .cart-panel { border-radius: 28px; max-height: 84vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Three.js 3D Background Canvas -->
+<canvas id="webgl-canvas"></canvas>
+
+<!-- Warm Himalayan Cafe Atmosphere -->
+<div class="warm-atmosphere"></div>
+<div class="cursor-aura" id="cursorAura"></div>
+
+<!-- Brand Header -->
+<header class="shell hero">
+  <div class="brand-core">
+    <div class="logo-container">
+      <div class="logo-glow"></div>
+      <div class="logo" aria-label="Feeling Hungry Cafe logo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAf4AAAH+CAIAAADyDftyAAAQAElEQVR4AbS8BYAVR9Y2/FR1Xxl3g2EGHdzd3QKEKCEkgSTE3d1ddmMb27i7uzuEGCEhkODujM+da91V/1O3h5thINl93/f7i2dOnzp1yk6dOlXdN7tSCKsFICwPQtpyDzwdZllEeRLS8pE3QtHUDiABW8DXhD1yr4VEqST1ss2p3Lsv6hBU8ORk9gUVvFKPJhWY9XgyRHPeGzDH/CeExXY8HTJ/BU8hSalGno17IE9JEswSXpFHmfWQ1GnOeEWeZpJS6OmQaYF95Z6E9G80WUpQgV2QEmQIMh6SPBmCQur/FVjaAqxCNBeybvMseRtCJiAsScBQCAuWhBQGQgDCgm3DF4DtgwVIIxHw2Qj64LdBXWF02BJYCT4YCDBJCD+EDWYkpG2RoTZ90QZSTAE1bcCGDMDyQ0ohTBOkYGKtJCzs6RpsxACJJEFemEp0cluyO7aWAHkbfgs+iaBgP4CgsmyiEJT7BfySnVqAZXMAgsMw8EFaEJYgpC2kTd4DeQ9e1qMtJF6WVEqbMI2wnQT2m00KAemBVeTedSmnMAlmW2DfIk/SXM2TeJRyjyElT5Ahkgx5D5R4YLbFqARFQkoBARIpjal9Aj4k7E8qvFkLv0yARQJcJpmQs5oFQfgS1DJtmKwxOwCRgJRGWcKyhE0IoySZBSQhhFEWSHQq2I5PSrtJmChqniX/v4Ngm7LJBzw+SSEsglmv5eZdc3hEc0mSp9xDUkKG88G+SQixr9CTCNFUpLWmxKNkRCI1MWjSYbY5ksoUkvdA3gOzZDxKJtGeaYcSgpJ9QZ19hZRQn0UEeYIM4TEsIpOEl/VKKUwy5IlkNslQ6EHSHwBWT4I6SXg6ySIyyaK/Z7yKHvU0ybN6EswSySLyzUF58yx5SggyBBmCzF+BvbQo+nv9FsqsTnhCr2Jz6sld4xuSkU5oCcJI6YTSOBN5zRUX3HxgXvFPU10ICCEghYZ2AQVoo2IBpgBCKAlCSFvAklJYlrR9Pmgo17Wk5SrpatZFjMsFuHBtmxVcKAfCiOjIBJg4Hs3ObctmU9RhT5QaanoS7BFQsC0OmKNQtu1TWgnTtslqsB+WszFHSmlZllbswbQgtJAQ2rAs5WTNZASLwQkbQAhhxLSfAXMeTI19/owGm0nIqZZ47oc0L2IVajSnzFLBA3kWEWQ8UM4skcxS0hyenDQpJE8ks2SYZQsevCwlHlpkPaFHmxd5dT15gkpKaDOzHBAJSRORQkqamJWFgFBNUsDIaXsuC0WenE7kWU9LyjwIb3FBfxDsQsOsFRmvNEH/VE5kPaL21mF1U9Er+z9SkUh/1Qj7JZqXUj2ZZVFzUM5SgkwSxpSeUlKUZCj3+CTjZUk9iUeZ/W/wV8rN5eQ9sEEOlCBDUEi6X7AoiaRCUvJXDDVZxIUSZrHJ/rlg7DQJqnk8mRZgHU9ChqCal00yXvZvKGsRSYXmFT05KZFU+G8Y6rfAX9WiGotICY8hTYJCIpn9G+Y/qjWfF8xm8wGMyxY0IynDK6OvhJHbGkYitAmLloKllFQQ3IVUSTxdSZFW0sRI7mVqQigGTlcIl+rkuJpuXDkxNxb32ewCronGQS1StZSuAC9qSmjHiUnTtIJWZmrCkjw2hCVgBkAZ22B8oDolCXCbMCIIQAJwHVPLsmXciYLjSIANariuiAnb1XBcFWXXEInor4StbQ5asw3JAWuvHQEIOFITSrJXsEhBKCFYguYpaWSxT2qu5vGeCnnWIsgQFJLuiz/l+5btLWFTHpqLPUlz2rx0X56aFDbvNMmziGAp4QmTWUqagUsgIQWhhVI8bnma03RktKuTYDYBJFbHa5C+JBJZI2T0p8M0wfNAP+iZMEnDWycuWhPAtUJCTUuuEcGmWqzTXwwYzRNHkkRz+f+Upw8RLWqxZY6BaCHfN0sdmZQyk+Q9hg0lGfKElyVtzjNLqERiIwZoOSoKqeOBdQmP/xvKKgQVPEqGIO+BPNGiHS9LBRaR7hfgkoPEjNBToPK+8IpImxcx2wIsZafmvkEuASoknqaLJO9JSD0JKcEs4TGkHlpImP0rePpJ+ldq+5VzrZrL2QizpASZ/YLTJJoXecqekLQFmmt6PPU1rWJ2qUpINFnBjaS4g5o2lYbkZkyUkoPQyiwXFSglzL7lvZ/g8iXAYg/Q/CcggnbQFlIIxB3X7FZASJsqSkhmE0GbT25xZSv4FQKAX7s+5QS0m4J4Kpx0A5UGlap1KtxUI1cpIJwgFPWDFmMAXKfpap8IKJAWhKBjQSkNMhKJtwEXjBAQypRwhC54pGhmWGhOONY1haYcgBTKFub4QYskhKBECEPJEDQmaRLMemghSWbJiEQikwQFHs+6HrMvZZGHZJGX9WhSmGQ8uUcpZBceeFD+f5lqC5vy0FzsSZrT5qX78tSksHmnSZ5FBEsJT5jMUtIMXAIJKQgtlOJxy9OcpimjC79wW4g9gB/A99/f/t//dfnll91555133Hbbv15//dFHv3Lffffec/c99953//0PffUr//Klr9z3jW/c/69f+9o//uPffv7zX/673/r0Jz7x6Q994GOf/cznv/7vv/7+f/7gt7/947/7vd/553/61ne/+71HH33sZz/72fe+9733v//9H/jAB971rnf99//+348//rjC3n995JGPf/xjn/zkp97zvvf/3V/9zfve//4Pvf/9f/AHf/Dzn/vcQw899NOf/vTee+/95S9/efz48Xfeeeehhx763Oc+d9999y1cuHDr1q2/+93vPv3pT7/jHe/40Ic+9JnP/P77P/DBz/3+5+677z7A6tWrP/vZz77nPe/5kz/5k4997GN/+Zd/fc8993ziE5/48Ic/DFj/87//u3Xr1l/96ldf/vKXv/Wtb7322ms//OEP77vvPvzy77/1rW898sgj27dv/+3f/u373//+T3ziE5/73Ofe9773fexjH/vIRz7yuc997qtf/eqjjz767LPP/uu//utdd9113333feUrX/ntb3/78Y9//K677vrqV7/6wAMPPPDAA5/61Kfuf//7P/rRj77vf+/98Ic//NCHP/rhj3zks5/97MMPP/yLX/zi17/+9ec///nPf/7zP//5z3/pS1/63Oc+9+Uvf/kLX/jCf/zHf/zZn/3Zxz72sU9/+tOPPvro73//+zvuuOPDH/7wfffd95WvfOWrX/3qAw888M53vvPuu+++/vrr77zzTtx03/ve995///0/+9nPvv3tbz/66KM/+clPfvSjHz3zzDPvvPPOe++998Mf/vC999778Y9//POf//zHP/7xT37yk3/yJ3/y2c9+9utf//rvf//7//mf//nCF77wjne849Of/vQ3v/nNX//6148//vhPf/rTL37xi3/yJ3/y6U9/+v777/n85z//i1/84tFHH/3e9773rW9960tf+tJDDz30i1/84qtf/eq3vvWtn/70p5/97Ge/+MUvfvWrX/3BD37w1a9+9Qc/+MFPfvKTf/EXf/GFL3zhv//7v3/84x//7Gc/+6UvfenrX//6V7/61e9///vf/e53f/e73z366KOPPvroj370ox/96EcPP/zwD3/4w4ceegiP6U9/+tNf/vKXv/jFL375y1/+6le/+vGPf/zTn/70F77whS9/+cvf+c53vvnNb37729/+7ne/+/3vf//b3/72D3/4w+985zsPPfTQww8//MlPfvKuu+764he/+OUvf/nzn//8n//5n3/qU5/68z//869+9atf//rXf/CDH/zc5z735S9/+Wtf+9pDDz30ve997wEAXfvwhz/82c9+9qtf/erXv/71n//85z/4wQ9+8IMf/OAHP/j+97//8MMPf/zjH//sZz/75S9/+Ytf/OKXvvSlb37zm1//+tcfeeSRH/zgB4888sgvf/nL73znO7/4xS9+9atfffWrX/3BD37w93//9z/+8Y+//e1vP/jggw8++OCf//mf//CHP/zu7/7ue9/73kMPPfS9733v61//+qOPPvrtb3/7hz/84Xe/+92f/OQnv/jFL37961//zne+8/3vf//LX/7y97///b/8y7/8+te//u///u//+q//+t3vfvdrX/vaV77ylT/4gz/45Cc/+clPfvILX/jCP/zDP3z729/+1re+9f3vf/9nPvOZ73znO9/5znd+8IMf/MM//MM3v/nNP/iDP/jKV77y5S9/+bvf/e43vvGNP/iDP/h//+//fetb3/o/D8n+K+3Z/42V9u08639e6a9F9v+r+u+x0n6r7Nl/Z4q0r8iW9hXZP67Yv83qf4P0N2a7w/L/V7D0b8T6XwH7Pwn9q7/57+q2w5D8m1b2X0j3/yvV38l/e/+39n93/3e9/4b6/3j/t1b67yD726h/Wfbf3v9N/b9v/W8s47/V//c4m436t9V/D2T3+v9e/Z1I+4oEvvU/t//eSv9t/L+30r+N9Hf//0/0fxD/10j/36r/61j/W/Z/PZDt0/85zH8UuP/Vf9/4b+b/b6T/13X/f/3f3f/39v93/Pew6f/r/b8Osv9b/t+q/78A2b8z2f+V6b+Z2L9l+38p/S8EwP437f8fD7+v+3+L9L9R8n8t/3+5/t/v/y7Gf7f6f+O/9//eSv8bZP8b/9+g/9aI/77/t5H+a/l/K/3f8v+f4f8G8f89839j/f9V/N+k/r9p/n8t9f9e/p/y/4/8/y7/X0f9/179/3/8D4z/pZgKAAAAAElEQVTCwT/+iP8AAAAASUVORK5CYII=" alt="Feeling Hungry Logo">
+      </div>
+    </div>
+    <h1 class="brand-title">FEELING <span>HUNGRY</span></h1>
+    <p class="tagline">HIMALAYAN & CHINESE CAFE · EST. 2024</p>
+    
+    <div class="cafe-badges">
+      <span class="badge-pill">🏔️ <b>Nepali & Chinese</b> Fare</span>
+      <span class="badge-pill">🌶️ Fresh Wok & Tandoor</span>
+      <span class="badge-pill">🪑 Dine-in Table Service</span>
+    </div>
+  </div>
+</header>
+
+<!-- Sticky Navigation & Search Hub -->
+<div class="sticky-hub">
+  <div class="shell">
+    <label class="searchbox">
+      <span class="search-icon">⌕</span>
+      <input id="searchInput" type="search" placeholder="Search momos, noodles, thukpa, chaap..." autocomplete="off" aria-label="Search menu items">
+    </label>
+
+    <!-- Category Nav Strip -->
+    <nav class="category-strip" id="categoryStrip" aria-label="Menu Categories"></nav>
+  </div>
+</div>
+
+<!-- Main Matrix (Grid) Menu Container -->
+<main class="shell" id="menuRoot"></main>
+
+<!-- Warm Footer -->
+<footer class="shell footer">
+  FEELING HUNGRY · HIMALAYAN & CHINESE CULINARY LAB · SERVED FRESH & WARM
+</footer>
+
+<!-- Floating Bottom Cart Launcher -->
+<div class="bottom-cart">
+  <button class="cart-button" id="openCart" type="button">
+    <span class="cart-left">
+      <span class="cart-icon-circle">🛒</span>
+      <span class="cart-copy">
+        <strong>View Your Order</strong>
+        <small id="cartCount">0 items selected</small>
+      </span>
+    </span>
+    <span class="cart-total-badge" id="cartTotal">₹0</span>
+  </button>
+</div>
+
+<!-- Slide-Up Checkout Drawer -->
+<div class="overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+  <section class="cart-panel">
+    <div class="panel-head">
+      <h2 id="cartTitle">Your Order 🛍️</h2>
+      <button class="close-btn" id="closeCart" aria-label="Close cart">×</button>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+    <div id="cartEmpty" class="empty-state hidden">
+      Your cart is empty.<br>Add some delicious momos or noodles!
+    </div>
+
+    <div class="form-grid">
+      <div class="field order-type-field">
+        <label for="orderTypeSelect">ORDER TYPE *</label>
+        <select id="orderTypeSelect">
+          <option value="DINE-IN" selected>🍽️ Dine-in Service</option>
+          <option value="TAKEAWAY">🥡 Takeaway Order</option>
+        </select>
+      </div>
+
+      <div class="field" id="tableNumberField">
+        <label for="tableNumber">TABLE NUMBER *</label>
+        <input id="tableNumber" type="text" inputmode="numeric" placeholder="e.g. 04" maxlength="12" required>
+      </div>
+
+      <div id="returningWelcome" class="returning-welcome hidden" role="status" aria-live="polite"></div>
+
+      <div class="field">
+        <label for="customerName">CUSTOMER NAME *</label>
+        <input id="customerName" type="text" placeholder="Your name" maxlength="60" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="customerMobile">MOBILE NUMBER *</label>
+        <input id="customerMobile" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" minlength="10" placeholder="10-digit mobile number" autocomplete="tel" required>
+      </div>
+
+      <div class="field">
+        <label for="paymentMethod">PAYMENT METHOD *</label>
+        <select id="paymentMethod" required>
+          <option value="" selected disabled>Select payment method</option>
+          <option value="Cash">Cash</option>
+          <option value="UPI">UPI / QR Code</option>
+          <option value="Pay at Counter">Pay at Counter</option>
+        </select>
+      </div>
+
+      <div class="field notes">
+        <label for="specialNotes">SPECIAL INSTRUCTIONS (OPTIONAL)</label>
+        <textarea id="specialNotes" placeholder="Extra spicy, mild chili, no onion..."></textarea>
+      </div>
+    </div>
+
+    <div class="bill">
+      <div class="bill-row">
+        <span>Items Subtotal</span>
+        <span id="subtotal">₹0</span>
+      </div>
+      <div class="bill-row">
+        <span>Dine-in / Service Fee</span>
+        <span>₹0</span>
+      </div>
+      <div class="bill-row total">
+        <span>Total Payable</span>
+        <span id="panelTotal">₹0</span>
+      </div>
+    </div>
+
+    <button class="checkout-btn" id="checkoutBtn" type="button">Confirm Dine-in Order · ₹0</button>
+    <p class="note">Standalone View: Generates structured order JSON and readies POS integration.</p>
+  </section>
+</div>
+
+<!-- Notification Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ==========================================================================
+   Full Menu Database & Item Descriptions
+   ========================================================================== */
+const ITEM_DESCRIPTIONS = {"Aalu Tikki Wrap":"A delicious wrap cut in half revealing a golden-fried spiced potato patty, fresh lettuce, and tangy sauce.","Veg Wrap":"A fresh flatbread tightly rolled around assorted grilled vegetables and creamy mayo, cut diagonally.","Paneer Wrap":"A toasted wrap oozing with soft paneer cubes, crunchy onions, and mint chutney.","Crunchy Wrap":"A perfectly grilled wrap cut in half, showing a deep-fried crunchy vegetable filling and melted cheese.","Veg Full Loaded Wrap":"A thick, bursting wrap stuffed with vegetables, paneer, and rich sauces, resting on a dark slate board.","Cheese Wrap":"A golden toasted wrap pulled apart to show thick mozzarella and cheddar cheese stretching out.","Paneer Tikka Wrap":"A wrap cut open to expose bright red, smoky tandoori paneer chunks, crisp capsicum, and mint sauce.","Tandoori Soya Chaap Wrap":"A tightly rolled wrap filled with spicy, red tandoori soya chaap pieces and fresh onion rings.","Tandoori Malai Chaap Wrap":"A delicious wrap filled with rich, creamy white malai chaap and mild spices, cut in half on a rustic board.","Paneer Malai Tikka Wrap":"A grilled wrap exposing melt-in-the-mouth creamy white paneer tikka with gentle char marks.","Veg Noodles":"A steaming bowl of classic stir-fried veg noodles tossed with shredded cabbage, carrots, and soy sauce.","Chilli Garlic Noodle":"Spicy, glossy noodles tossed with burnt garlic bits and red chili flakes, garnished with spring onions.","Schezwan Hakka Noodles":"A vibrant bowl of Hakka noodles coated in fiery red Schezwan sauce, with bell peppers and chopsticks resting on the bowl.","Hakka Noodles":"Perfectly non-sticky Hakka noodles tossed with fresh wok-fried vegetables, served in a black ceramic bowl.","Paneer Noodles":"Delicious wok-tossed noodles generously topped with soft, fried paneer cubes and green peppers.","Schezwan Paneer Noodles":"Spicy red noodles tossed with paneer chunks in a rich Schezwan sauce, steaming hot.","Veg Maggi":"A comforting, hot bowl of classic masala Maggi noodles with mixed vegetables, garnished with coriander.","Aloo Tikki Burger":"A classic burger with a crispy golden potato patty, fresh tomato, onion slice, and creamy mayo in a toasted bun.","Cheese Burger":"A mouth-watering burger with a thick patty and a perfectly melted square of yellow cheese dripping over the sides.","Paneer Burger":"A delicious burger featuring a thick, crispy-fried paneer patty, crisp lettuce, and spicy sauce.","Maharaja Burger":"A towering, double-decker tall burger loaded with multiple crispy patties, double cheese, jalapenos, and rich sauces.","KFC Style Burger":"An ultra-crispy, craggy, golden-fried zinger-style patty inside a premium sesame bun with fresh iceberg lettuce and mayo.","Veg Momos":"A bamboo steamer basket filled with beautifully pleated, translucent steamed veg momos.","Paneer Momos":"Steamed paneer momos in a bamboo basket, showing a soft, delicate texture, served with fiery red chutney.","Paneer Butter Momos":"Glossy momos tossed in a rich, creamy, orange butter masala gravy, garnished with fresh cream swirls.","Paneer Kurkure Momos":"Deep-fried momos with a heavily crusted, ultra-crunchy cornflake exterior, golden brown and appetizing.","Chilli Momos":"Fried momos tossed in a dark, glossy soy-chili sauce with thick cuts of bell peppers and onions.","Gravy Momos":"Momos submerged in a thick, rich, flavorful red gravy, garnished with coriander leaves.","Afgani Momos":"Creamy, white, rich Afghani momos coated in a malai marinade with gentle tandoor char marks.","Kurkure Cheese Corn Momos":"Extra-crunchy fried momos, split open slightly to reveal melted cheese and sweet corn inside.","Gyoza Momos":"Pan-fried momos with a perfectly crispy, golden-brown bottom and soft steamed top, served with soy dipping sauce.","Veg Cheese Corn Momos":"Steamed momos filled with gooey cheese and yellow corn, soft and appetizing.","Peri Peri Momos":"Crispy fried momos generously dusted with vibrant red peri-peri spice mix, served on a dark plate.","Veg Manchurian":"Golden fried vegetable dumplings tossed in a thick, dark, glossy brown Manchurian sauce with spring onions.","Chilli Mushroom":"Plump mushrooms wok-tossed in a spicy, glossy chili sauce with green capsicum and onions.","Honey Chilli Potato":"Crispy potato wedges coated in a sticky, glossy, sweet and spicy red sauce, garnished with white sesame seeds.","Honey Chilli Cauliflower":"Crispy cauliflower florets tossed in a glossy honey-chili glaze, topped with sesame seeds.","Chilli Paneer":"A premium bowl of Chilli Paneer dry, featuring perfectly fried paneer cubes coated in a dark, rich, glossy soy-chili sauce with thick-cut bell peppers.","Paneer 65":"Vibrant red, spicy, crispy-fried paneer cubes tossed with curry leaves and green chilies.","Veg Spring Rolls":"Golden, crispy, flaky spring rolls cut at an angle, showing a steaming hot vegetable filling inside.","KFC Veg Spring Rolls":"Extra-crunchy, crusted spring rolls with a thick, golden-fried KFC-style coating, served with sweet chili sauce.","Paneer Spring Rolls":"Crispy spring rolls sliced open to reveal a rich paneer and veggie filling, appetizing and hot.","KFC Paneer Spring Rolls":"Ultra-crispy, heavily breaded spring rolls stuffed with paneer, golden brown and crunchy.","Veg Fried Rice":"A perfectly shaped dome of wok-tossed vegetable fried rice with visible carrots, beans, and spring onions.","Schezwan Fried Rice":"A vibrant, spicy red Schezwan fried rice bowl, steaming hot and garnished with scallions.","Paneer Fried Rice":"Flavorful fried rice generously topped with golden-fried paneer cubes.","Mushroom Fried Rice":"Wok-tossed fried rice featuring savory, dark sautéed mushrooms and green onions.","Veg Clear Soup":"A warm, comforting bowl of crystal-clear broth with finely diced colorful vegetables.","Sweet Corn Soup":"A thick, creamy, yellow sweet corn soup in a white bowl, garnished with a few whole corn kernels and herbs.","Hot & Sour Soup":"A dark, rich, steaming bowl of hot and sour soup with tofu, mushrooms, and bamboo shoots, showing a spicy chili oil slick on top.","Manchow Soup":"A dark, savory brown Manchow soup topped generously with crispy fried noodles and fresh coriander.","Mushroom Soup":"A creamy, earthy, rich brown mushroom soup garnished with a swirl of fresh cream and cracked black pepper.","Paneer Soup":"A comforting, flavorful soup bowl featuring soft paneer cubes floating in a rich, savory broth.","Veg Grilled Sandwich":"A perfectly pressed sandwich with golden grill marks, cut in triangles, showing a loaded vegetable filling.","Cheese Grilled Sandwich":"A toasted sandwich pulled apart to show hot, melted, gooey cheese stretching beautifully between the slices.","Paneer Grilled Sandwich":"A thick, grilled sandwich revealing a spicy, rich paneer tikka filling with onions and peppers.","Chatpata Toast":"Crispy, golden-brown toast topped with a spicy, tangy, colorful vegetable mix and sev.","Butter Honey Toast":"Perfectly toasted golden bread glistening with melting butter and a drizzle of rich, amber honey.","Hungry Toast":"A signature, fully loaded open-faced toast piled high with melted cheese, veggies, and sauces.","Jam Toast":"Crispy golden toast generously spread with vibrant, glossy, ruby-red mixed fruit jam.","French Fries":"A classic paper cone overflowing with perfectly golden, crispy, salted French fries.","Peri Peri Fries":"Crispy French fries heavily coated in a vibrant red, spicy peri-peri seasoning.","Masala Fries":"Golden fries tossed in aromatic, dark Indian masala spices, served on a rustic board.","Potato Twister":"A spiral-cut whole potato on a wooden skewer, deep-fried to a golden crisp and dusted with spices.","Feeling Hungry Spcl. Thukpa":"A large, comforting bowl of authentic Thukpa noodle soup, rich broth loaded with fresh vegetables and long noodles.","Mushroom Duplex 12 pcs":"Deep-fried, crispy stuffed mushrooms, golden brown and crunchy, served on a slate platter with dip.","Veg Jhol Momos":"Authentic Nepali Veg momos submerged in a vibrant, orange, sesame-tomato soup base, garnished with fresh coriander.","Special Paneer Jhol Momos":"Plump paneer momos drowning in a rich, spicy, flavorful Nepali jhol broth.","Special Tea":"A classic, steaming cup of rich, milky Indian masala chai in a traditional clay kulhad or glass.","Coffee":"Smooth, light brown coffee-flavored ice cream, creamy and rich, served with a single coffee bean on top.","Cold Coffee":"A tall, frosted glass of creamy, thick cold coffee with a frothy top and a drizzle of chocolate syrup down the sides.","Mint Mojito":"A refreshing, bubbly glass of Mint Mojito filled with crushed ice, fresh mint leaves, and lime slices, with condensation on the glass.","Watermelon Mojito":"A vibrant, ruby-red iced mojito with fresh watermelon chunks, mint, and lime wedges in a tall glass.","Green Apple Mojito":"A bright, neon-green, refreshing mojito over ice, garnished with thin slices of green apple and mint.","Blue Berry Mojito":"A deep purple-blue, icy mojito loaded with fresh blueberries and mint leaves, visually stunning.","Bubblegum Mojito":"A fun, bright pink and blue gradient mojito over ice, colorful and refreshing.","Lemon Soda":"A classic, fizzy glass of fresh lime soda with ice cubes, a lemon wheel, and rising bubbles.","Chocolate Shake":"A highly indulgent, thick chocolate milkshake in a tall glass, topped with a mountain of whipped cream and chocolate chips.","Vanilla Shake":"A classic, creamy, pure white vanilla milkshake topped with a cherry and whipped cream.","Strawberry Shake":"A beautiful, pastel-pink strawberry milkshake with strawberry syrup drizzled on the inside of the glass.","Oreo Shake":"A thick milkshake blended with crushed Oreo cookies, topped with whipped cream and an entire Oreo cookie.","Tandoori Chaap":"Sizzling, bright red, smoky Tandoori Soya Chaap on skewers, with charred edges, served with onion rings and lemon.","Malai Chaap":"Tender soya chaap heavily coated in a rich, creamy, white malai marinade with gentle tandoor char marks.","Masala Chaap":"Spicy, dark-roasted masala soya chaap chunks tossed in a thick, flavorful dry spice mix.","Lemon Masala Chaap":"Tangy, spicy soya chaap chunks squeezed with fresh lemon juice and dusted with chaat masala.","Achari Chaap":"Vibrant orange soya chaap marinated in tangy Indian pickle (achar) spices, roasted to perfection.","Afghani Malai Chaap":"Extremely rich, cashew and cream marinated soya chaap, roasted in the tandoor, creamy and smoky.","Puri Peri Masala Chaap":"Tandoor-roasted soya chaap chunks dusted heavily with fiery red peri-peri spice powder.","Tandoori Malai Momos":"Plump momos coated in a thick, creamy white malai marinade, roasted in a tandoor with slight charring.","Tandoori Masala Momos":"Spicy, deep-red tandoori momos on a sizzling platter, smoky and appetizing.","Tandoori Lemon Masala Momos":"Tangy and spicy red tandoori momos served with a wedge of lemon and mint chutney.","Tandoori Achari Momos":"Tandoor-roasted momos marinated in tangy, bright orange pickling spices (achar).","Tandoori Lemon Malai Momos":"Creamy, white tandoori momos with a hint of tangy lemon zest and mild spices.","Tandoori Afghani Momos":"Ultra-rich, creamy, malai-coated momos cooked in a clay oven, smoky and decadent.","Tandoori Paneer Tikka":"A delicious pizza topped with smoky, bright red tandoori paneer tikka chunks, onions, and capsicum.","Malai Paneer Tikka":"Soft, melt-in-the-mouth paneer cubes coated in a thick, rich, white cashew-cream marinade with gentle grill marks.","Achari Paneer Tikka":"Tangy, vibrant orange paneer tikka marinated in Indian pickling spices, served on a rustic board.","Mushroom Tikka":"Plump whole mushrooms marinated in red tandoori spices and roasted until tender and smoky.","Cheesy Corn":"A freshly baked pizza with a golden crust, loaded with melted mozzarella cheese and sweet yellow corn.","Cheesy Mushroom":"A hot, cheesy pizza topped generously with sliced, roasted earthy mushrooms.","Cheesy Tomato":"A classic pizza with a bubbling cheese layer topped with fresh, juicy red tomato slices.","Margherita":"A classic Margherita pizza with a perfect blistered crust, rich red tomato sauce, melted mozzarella, and fresh basil leaves.","Farm Fresh":"A colorful pizza topped with fresh crunchy bell peppers, onions, tomatoes, and mushrooms over melted cheese.","Paneer Makhni":"An Indian-fusion pizza with a rich, orange, creamy makhani sauce base, topped with paneer cubes and coriander.","Fresh Pizza":"A vibrant, freshly baked pizza loaded with assorted garden vegetables and gooey cheese.","Delight Pizza":"An appetizing pizza fully loaded with premium toppings, olives, and jalapenos on a golden crust.","Spicy Achari":"A tangy, spicy pizza topped with paneer, onions, and flavorful Indian achari (pickle) spices.","Tandoori Pizza":"An Indian-style pizza with a spicy tandoori sauce base, loaded with veggies and smoky flavors.","Veg Hawaiian":"A sweet and savory pizza topped with melted cheese, jalapenos, and chunks of sweet pineapple.","Gourmet":"A premium, artisan-style pizza with a perfect crust, black olives, exotic veggies, and a drizzle of olive oil.","Chilly Pizza":"A fiery, spicy pizza loaded with green chilies, red paprika, and spicy seasoning over melted cheese.","Spicy Paneer":"A hot and spicy pizza generously topped with chili-marinated paneer cubes and red peppers.","Veg Deluxe":"A heavily loaded deluxe pizza overflowing with every vegetable topping, mushrooms, olives, and extra cheese.","Veg Loaded":"The ultimate vegetable pizza, completely covered in colorful toppings with cheese stretching from a sliced piece.","Mix Veg":"A simple, delicious, home-style pizza with a generous mix of capsicum, onion, and tomato over melted cheese.","Red Sauce Pasta":"A bowl of perfectly cooked penne pasta tossed in a rich, tangy, vibrant red tomato basil sauce.","White Sauce Pasta":"A creamy, rich bowl of Alfredo white sauce pasta loaded with sweet corn and black olives.","Pink Sauce Pasta":"Penne pasta coated in a luxurious, creamy pink mix of tomato and cheese sauces, garnished with parmesan.","Arrabiata Pasta":"Spicy, fiery red Arrabiata pasta with visible chili flakes, garlic, and fresh basil leaves.","Tandoori Pasta":"A unique fusion pasta tossed in a smoky, spicy, orange-red tandoori cream sauce with bell peppers.","Peri Peri Pasta":"A creamy, spicy pasta with a vibrant orange-red hue from peri-peri seasoning, appetizing and hot.","Masala Pasta":"An Indian-style macaroni pasta tossed with onions, tomatoes, and rich, earthy Indian spices.","Veggie Loaded Pasta":"A colorful bowl of pasta overflowing with broccoli, bell peppers, zucchini, and olives in a light sauce.","Pesto Pasta":"Penne pasta generously coated in a vibrant, bright green, oily basil pesto sauce, topped with pine nuts.","Alfredo Pasta":"A highly indulgent, thick, glossy white cheese Alfredo pasta, steaming hot in a wide ceramic bowl.","Cheesy Pasta":"A baked pasta dish with a thick, golden-brown crust of melted, bubbling mozzarella cheese on top.","Paneer Tikka Pasta":"A rich, creamy pasta bowl topped with smoky, charred red paneer tikka chunks.","Corn & Cheese Pasta":"A comforting, creamy white pasta loaded with sweet yellow corn kernels and gooey melted cheese.","Vanilla":"Two perfect, round scoops of pure white vanilla ice cream in a glass bowl, elegant and simple.","Chocolate":"Rich, dark, creamy chocolate ice cream scoops topped with a light dusting of cocoa powder.","Strawberry":"Pastel pink strawberry ice cream with visible chunks of real strawberries, served in a waffle cone.","Butterscotch":"Creamy yellow butterscotch ice cream dotted with crunchy, golden caramelized praline bits.","Mango":"Vibrant, bright yellow-orange mango ice cream scoops, looking smooth, creamy, and tropical.","Black Current":"Deep purple blackcurrant ice cream with rich, dark berry swirls throughout the scoop.","Cookies & Cream":"Creamy white ice cream heavily speckled with dark, crushed Oreo cookie crumbles.","Rajbhog":"Rich, golden-yellow traditional Indian Rajbhog ice cream, loaded with visible saffron strands and chopped nuts.","Pista":"Pale green pistachio ice cream heavily garnished with freshly chopped, bright green pistachio nuts.","Mint Chocolate Chip":"Refreshing, bright green mint ice cream loaded with dark, rich chocolate chips.","Hazelnut":"Indulgent, light brown hazelnut ice cream with swirls of chocolate and roasted hazelnut pieces.","Kesar Pista":"Golden-yellow saffron ice cream mixed with bright green pistachio bits, rich and authentic.","Chocolate Chip":"Classic vanilla ice cream generously studded with large, dark chocolate chunks.","Bubble Gum":"Fun, vibrant pink and blue swirled bubblegum flavored ice cream, bright and playful.","Ferrero Rocher":"Luxurious, rich chocolate-hazelnut ice cream garnished with crushed Ferrero Rocher chocolates and gold flakes."};
+
+const MENU = [
+ {category:"Momos",emoji:"🥟",items:[["Veg Momos",79],["Paneer Momos",120],["Paneer Butter Momos",139],["Paneer Kurkure Momos",169],["Chilli Momos",169],["Gravy Momos",170],["Afgani Momos",169],["Kurkure Cheese Corn Momos",179],["Gyoza Momos",139],["Veg Cheese Corn Momos",159],["Peri Peri Momos",129]]},
+ {category:"Special Thupka & Nepali Special",emoji:"🍜",items:[["Feeling Hungry Spcl. Thukpa",80],["Mushroom Duplex 12 pcs",220],["Veg Jhol Momos",120],["Special Paneer Jhol Momos",150]]},
+ {category:"Noodles",emoji:"🥢",items:[["Veg Noodles",79],["Chilli Garlic Noodle",99],["Schezwan Hakka Noodles",120],["Hakka Noodles",99],["Paneer Noodles",120],["Schezwan Paneer Noodles",149],["Veg Maggi",59]]},
+ {category:"Chinese Specials",emoji:"🥡",items:[["Veg Manchurian",180],["Chilli Mushroom",180],["Honey Chilli Potato",169],["Honey Chilli Cauliflower",179],["Chilli Paneer",200],["Paneer 65",220]]},
+ {category:"Spring Rolls",emoji:"🥠",items:[["Veg Spring Rolls",80],["KFC Veg Spring Rolls",120],["Paneer Spring Rolls",149],["KFC Paneer Spring Rolls",170]]},
+ {category:"Fried Rice",emoji:"🍚",items:[["Veg Fried Rice",160],["Schezwan Fried Rice",180],["Paneer Fried Rice",189],["Mushroom Fried Rice",179]]},
+ {category:"Soup",emoji:"🍲",items:[["Veg Clear Soup",79],["Sweet Corn Soup",89],["Hot & Sour Soup",69],["Manchow Soup",89],["Mushroom Soup",99],["Paneer Soup",99]]},
+ {category:"Tandoori Chaap",emoji:"🔥",items:[["Tandoori Chaap",230],["Malai Chaap",200],["Masala Chaap",200],["Lemon Masala Chaap",210],["Achari Chaap",210],["Afghani Malai Chaap",220],["Puri Peri Masala Chaap",210]]},
+ {category:"Tandoori Momos",emoji:"🍢",items:[["Tandoori Malai Momos",159],["Tandoori Masala Momos",159],["Tandoori Lemon Masala Momos",169],["Tandoori Achari Momos",169],["Tandoori Lemon Malai Momos",169],["Tandoori Afghani Momos",170]]},
+ {category:"Paneer Tikka",emoji:"🔥",items:[["Tandoori Paneer Tikka",250],["Malai Paneer Tikka",270],["Achari Paneer Tikka",250],["Mushroom Tikka",180]]},
+ {category:"Wraps",emoji:"🌯",items:[["Aalu Tikki Wrap",60],["Veg Wrap",50],["Paneer Wrap",99],["Crunchy Wrap",69],["Veg Full Loaded Wrap",110],["Cheese Wrap",99],["Paneer Tikka Wrap",130],["Tandoori Soya Chaap Wrap",120],["Tandoori Malai Chaap Wrap",130],["Paneer Malai Tikka Wrap",130]]},
+ {category:"Burger",emoji:"🍔",items:[["Aloo Tikki Burger",39],["Cheese Burger",79],["Paneer Burger",99],["Maharaja Burger",129],["KFC Style Burger",149]]},
+ {category:"Sandwich",emoji:"🥪",items:[["Veg Grilled Sandwich",89],["Cheese Grilled Sandwich",120],["Paneer Grilled Sandwich",149],["Chatpata Toast",49],["Butter Honey Toast",59],["Hungry Toast",59],["Jam Toast",49]]},
+ {category:"Fries",emoji:"🍟",items:[["French Fries",79],["Peri Peri Fries",89],["Masala Fries",89],["Potato Twister",99]]},
+ {category:"Pizza",emoji:"🍕",pizza:true,items:[["Cheesy Corn",99],["Cheesy Mushroom",99],["Cheesy Tomato",99],["Margherita",99],["Farm Fresh",149],["Paneer Makhni",149],["Fresh Pizza",149],["Delight Pizza",149],["Spicy Achari",159],["Tandoori Paneer Tikka",159],["Tandoori Pizza",159],["Veg Hawaiian",159],["Gourmet",185],["Chilly Pizza",185],["Spicy Paneer",185],["Veg Deluxe",185],["Veg Loaded",209],["Mix Veg",209]]},
+ {category:"Pasta",emoji:"🍝",items:[["Red Sauce Pasta",129],["White Sauce Pasta",149],["Pink Sauce Pasta",159],["Arrabiata Pasta",159],["Tandoori Pasta",169],["Peri Peri Pasta",169],["Masala Pasta",149],["Veggie Loaded Pasta",179],["Pesto Pasta",179],["Alfredo Pasta",189],["Cheesy Pasta",189],["Paneer Tikka Pasta",189],["Corn & Cheese Pasta",179]]},
+ {category:"Beverage",emoji:"🥤",items:[["Special Tea",30],["Coffee",39],["Cold Coffee",79],["Mint Mojito",79],["Watermelon Mojito",79],["Green Apple Mojito",79],["Blue Berry Mojito",79],["Bubblegum Mojito",79],["Lemon Soda",49],["Chocolate Shake",79],["Vanilla Shake",89],["Strawberry Shake",89],["Oreo Shake",89]]},
+ {category:"Ice Cream",emoji:"🍨",items:[["Vanilla",50],["Chocolate",50],["Strawberry",50],["Butterscotch",50],["Mango",50],["Black Current",50],["Cookies & Cream",50],["Rajbhog",50],["Pista",50],["Mint Chocolate Chip",50],["Hazelnut",50],["Kesar Pista",50],["Chocolate Chip",50],["Bubble Gum",50],["Ferrero Rocher",50]]}
+];
+
+const PIZZA_SIZES = [
+  {key:"R", label:"Reg", multiplier: 1},
+  {key:"M", label:"Med", multiplier: 1.5},
+  {key:"L", label:"Lrg", multiplier: 2}
+];
+
+const cart = new Map();
+const money = n => "₹" + Number(n).toLocaleString("en-IN", {maximumFractionDigits: 2});
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const itemKey = (category, name, size="") => `${category}::${name}${size ? "::"+size : ""}`;
+
+/* ==========================================================================
+   Three.js Himalayan Cafe Scene: Floating Momos, Chilies, Star Anise & Leaves
+   ========================================================================== */
+let scene, camera, renderer, floatGroup, steamParticles;
+let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+const isMobile = window.innerWidth <= 768;
+
+function initThreeHimalayanScene() {
+  const canvas = document.getElementById("webgl-canvas");
+  scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x120c08, 0.002);
+
+  camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 210;
+
+  renderer = new THREE.WebGLRenderer({ 
+    canvas: canvas, 
+    alpha: true, 
+    antialias: !isMobile,
+    powerPreference: "high-performance"
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  floatGroup = new THREE.Group();
+  scene.add(floatGroup);
+
+  // Materials
+  const momoMat = new THREE.MeshStandardMaterial({
+    color: 0xf5ebd7,
+    roughness: 0.65,
+    metalness: 0.05
+  });
+
+  const chiliMat = new THREE.MeshStandardMaterial({
+    color: 0xd90429,
+    roughness: 0.28,
+    metalness: 0.15
+  });
+
+  const chiliStemMat = new THREE.MeshStandardMaterial({
+    color: 0x2d6a4f,
+    roughness: 0.6,
+    metalness: 0.1
+  });
+
+  const starAniseMat = new THREE.MeshStandardMaterial({
+    color: 0x4a2411,
+    roughness: 0.75,
+    metalness: 0.1
+  });
+
+  const bambooLeafMat = new THREE.MeshStandardMaterial({
+    color: 0x40916c,
+    roughness: 0.5,
+    metalness: 0.1,
+    side: THREE.DoubleSide
+  });
+
+  const numObjects = isMobile ? 14 : 28;
+
+  // 1. Procedural Levitating Momos (Dumplings)
+  for (let i = 0; i < (isMobile ? 4 : 8); i++) {
+    const momoGroup = new THREE.Group();
+    // Dumpling pouch body
+    const bodyGeo = new THREE.SphereGeometry(4.8, 16, 12);
+    bodyGeo.scale(1.2, 0.85, 1.1);
+    const body = new THREE.Mesh(bodyGeo, momoMat);
+    momoGroup.add(body);
+
+    // Pinched pleat crest
+    const topGeo = new THREE.ConeGeometry(2.2, 2.4, 8);
+    topGeo.translate(0, 3.4, 0);
+    const top = new THREE.Mesh(topGeo, momoMat);
+    momoGroup.add(top);
+
+    momoGroup.position.set(
+      (Math.random() - 0.5) * 320,
+      (Math.random() - 0.5) * 260,
+      (Math.random() - 0.5) * 200
+    );
+    momoGroup.rotation.set(Math.random() * 0.6, Math.random() * Math.PI * 2, Math.random() * 0.4);
+    momoGroup.userData = {
+      rotX: 0.005,
+      rotY: 0.008,
+      baseY: momoGroup.position.y,
+      speed: 0.0012 + Math.random() * 0.001
+    };
+    floatGroup.add(momoGroup);
+  }
+
+  // 2. Procedural Floating Red Chilies
+  for (let i = 0; i < (isMobile ? 4 : 8); i++) {
+    const chiliGroup = new THREE.Group();
+    // Chili pepper pod
+    const podGeo = new THREE.CylinderGeometry(0.5, 1.8, 12, 10);
+    podGeo.scale(1, 1, 0.8);
+    const pod = new THREE.Mesh(podGeo, chiliMat);
+    chiliGroup.add(pod);
+
+    // Green stem
+    const stemGeo = new THREE.CylinderGeometry(0.4, 0.5, 3, 6);
+    stemGeo.translate(0, 6.5, 0);
+    const stem = new THREE.Mesh(stemGeo, chiliStemMat);
+    chiliGroup.add(stem);
+
+    chiliGroup.position.set(
+      (Math.random() - 0.5) * 340,
+      (Math.random() - 0.5) * 280,
+      (Math.random() - 0.5) * 220
+    );
+    chiliGroup.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * 0.8);
+    chiliGroup.userData = {
+      rotX: 0.006,
+      rotY: 0.007,
+      baseY: chiliGroup.position.y,
+      speed: 0.0014
+    };
+    floatGroup.add(chiliGroup);
+  }
+
+  // 3. Procedural Floating Star Anise Spices
+  for (let i = 0; i < (isMobile ? 3 : 6); i++) {
+    const aniseGroup = new THREE.Group();
+    // 6-pointed star petals
+    for (let p = 0; p < 6; p++) {
+      const petalGeo = new THREE.ConeGeometry(1.2, 4.8, 6);
+      petalGeo.rotateZ(Math.PI / 2);
+      petalGeo.translate(2.2, 0, 0);
+      const petal = new THREE.Mesh(petalGeo, starAniseMat);
+      petal.rotation.z = (p * Math.PI) / 3;
+      aniseGroup.add(petal);
+    }
+    aniseGroup.position.set(
+      (Math.random() - 0.5) * 320,
+      (Math.random() - 0.5) * 240,
+      (Math.random() - 0.5) * 180
+    );
+    aniseGroup.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+    aniseGroup.userData = {
+      rotX: 0.004,
+      rotY: 0.009,
+      baseY: aniseGroup.position.y,
+      speed: 0.001
+    };
+    floatGroup.add(aniseGroup);
+  }
+
+  // 4. Procedural Floating Bamboo / Tea Leaves
+  for (let i = 0; i < (isMobile ? 3 : 6); i++) {
+    const leafGeo = new THREE.PlaneGeometry(2.2, 9, 2, 4);
+    const leaf = new THREE.Mesh(leafGeo, bambooLeafMat);
+    leaf.position.set(
+      (Math.random() - 0.5) * 360,
+      (Math.random() - 0.5) * 280,
+      (Math.random() - 0.5) * 220
+    );
+    leaf.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+    leaf.userData = {
+      rotX: 0.008,
+      rotY: 0.005,
+      baseY: leaf.position.y,
+      speed: 0.0016
+    };
+    floatGroup.add(leaf);
+  }
+
+  // 5. Warm Steam Aroma Particle Cloud
+  const steamCount = isMobile ? 350 : 750;
+  const steamGeo = new THREE.BufferGeometry();
+  const steamPositions = new Float32Array(steamCount * 3);
+  const steamColors = new Float32Array(steamCount * 3);
+
+  const colGold = new THREE.Color(0xe9c46a);
+  const colTerracotta = new THREE.Color(0xc85a32);
+
+  for (let s = 0; s < steamCount; s++) {
+    steamPositions[s * 3] = (Math.random() - 0.5) * 550;
+    steamPositions[s * 3 + 1] = (Math.random() - 0.5) * 450;
+    steamPositions[s * 3 + 2] = (Math.random() - 0.5) * 350;
+
+    const chosen = Math.random() > 0.4 ? colGold : colTerracotta;
+    steamColors[s * 3] = chosen.r;
+    steamColors[s * 3 + 1] = chosen.g;
+    steamColors[s * 3 + 2] = chosen.b;
+  }
+
+  steamGeo.setAttribute('position', new THREE.BufferAttribute(steamPositions, 3));
+  steamGeo.setAttribute('color', new THREE.BufferAttribute(steamColors, 3));
+
+  const steamMat = new THREE.PointsMaterial({
+    size: 2.4,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.55,
+    blending: THREE.AdditiveBlending
+  });
+
+  steamParticles = new THREE.Points(steamGeo, steamMat);
+  scene.add(steamParticles);
+
+  // Warm Himalayan Lantern Lighting
+  const ambientLight = new THREE.AmbientLight(0x2b1911, 1.9);
+  scene.add(ambientLight);
+
+  const lanternLight = new THREE.PointLight(0xf4a261, 2.8, 450);
+  lanternLight.position.set(80, 120, 100);
+  scene.add(lanternLight);
+
+  const chiliRimLight = new THREE.PointLight(0xd90429, 2.2, 400);
+  chiliRimLight.position.set(-100, -80, 80);
+  scene.add(chiliRimLight);
+
+  const brassSunLight = new THREE.DirectionalLight(0xe9c46a, 1.4);
+  brassSunLight.position.set(0, 180, 140);
+  scene.add(brassSunLight);
+
+  window.addEventListener("resize", onWindowResize);
+  if (!isMobile) {
+    document.addEventListener("mousemove", onDocumentMouseMove);
+  }
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onDocumentMouseMove(e) {
+  mouseX = (e.clientX - window.innerWidth / 2) * 0.1;
+  mouseY = (e.clientY - window.innerHeight / 2) * 0.1;
+
+  const aura = document.getElementById("cursorAura");
+  if (aura) {
+    aura.style.left = e.clientX + "px";
+    aura.style.top = e.clientY + "px";
+  }
+}
+
+function animateThree() {
+  requestAnimationFrame(animateThree);
+
+  const t = performance.now() * 0.001;
+
+  floatGroup.children.forEach(child => {
+    if (child.userData) {
+      child.rotation.x += child.userData.rotX;
+      child.rotation.y += child.userData.rotY;
+      child.position.y = child.userData.baseY + Math.sin(t * 1.6 + child.position.x) * 6;
+    }
+  });
+
+  if (steamParticles) {
+    steamParticles.rotation.y = t * 0.015;
+    steamParticles.rotation.x = Math.sin(t * 0.008) * 0.04;
+  }
+
+  // Smooth camera orbit on desktop
+  if (!isMobile) {
+    targetX = mouseX * 0.25;
+    targetY = mouseY * 0.25;
+    camera.position.x += (targetX - camera.position.x) * 0.04;
+    camera.position.y += (-targetY - camera.position.y) * 0.04;
+    camera.lookAt(scene.position);
+  }
+
+  renderer.render(scene, camera);
+}
+
+/* ==========================================================================
+   Matrix Grid Menu Rendering & GSAP Continuous Levitation
+   ========================================================================== */
+const categoryStrip = document.getElementById("categoryStrip");
+const menuRoot = document.getElementById("menuRoot");
+const searchInput = document.getElementById("searchInput");
+
+function renderMenu() {
+  // Category Pill Bar
+  categoryStrip.innerHTML = 
+    `<button class="cat-btn active" data-target="all"><span class="emoji">🏔️</span> All Items</button>` +
+    MENU.map(c => `<button class="cat-btn" data-target="${slug(c.category)}"><span class="emoji">${c.emoji}</span> ${c.category}</button>`).join("");
+
+  // Menu Sections with High-Efficiency Matrix Grid (Simultaneous Multi-Card Viewing)
+  menuRoot.innerHTML = MENU.map(c => `
+    <section class="menu-section" id="${slug(c.category)}" data-category="${c.category}">
+      <div class="section-head">
+        <div>
+          <h2><span class="emoji">${c.emoji}</span> ${c.category}</h2>
+          <p>Freshly prepared authentic Himalayan & Chinese specialties</p>
+        </div>
+        <span class="section-count">${c.items.length} items</span>
+      </div>
+      
+      <div class="items-grid">
+        ${c.items.map(([name, price]) => renderCard(c, name, price)).join("")}
+      </div>
+    </section>
+  `).join("");
+
+  initGSAPLevitation();
+  if (!isMobile) {
+    initCardTiltPhysics();
+  }
+}
+
+function renderCard(c, name, price) {
+  const cardSlug = slug(c.category + "-" + name);
+  const selectedSize = c.pizza ? "R" : "";
+  const desc = ITEM_DESCRIPTIONS[name] || "Prepared with fresh spices in our Himalayan wok.";
+  
+  return `
+    <article class="item-card" 
+             id="card-${cardSlug}"
+             data-card-slug="${cardSlug}"
+             data-category="${c.category}" 
+             data-name="${name}" 
+             data-base-price="${price}"
+             data-search-text="${(name + ' ' + c.category).toLowerCase()}">
+      <div class="card-glare"></div>
+      
+      <div>
+        <div class="card-top">
+          <div class="food-icon-circle" aria-label="${name}">
+            <span>${c.emoji}</span>
+          </div>
+          <div class="item-info">
+            <span class="item-badge">${c.category}</span>
+            <h3>${name}</h3>
+          </div>
+        </div>
+
+        <div class="item-info">
+          <p class="item-desc" title="${desc}">${desc}</p>
+          
+          ${c.pizza ? `
+            <div class="pizza-sizes" aria-label="Select Pizza Size">
+              ${PIZZA_SIZES.map(s => `
+                <button type="button" 
+                        class="size-btn ${s.key === "R" ? "selected" : ""}" 
+                        data-size="${s.key}" 
+                        data-category="${c.category}" 
+                        data-name="${name}" 
+                        data-base="${price}">
+                  ${s.label}
+                </button>
+              `).join("")}
+            </div>
+          ` : ''}
+        </div>
+      </div>
+
+      <div class="card-bottom">
+        <div class="price-box">
+          ${c.pizza ? '<span class="from">STARTING</span>' : '<span class="from">PRICE</span>'}
+          <span class="price-tag" id="price-${cardSlug}">
+            ${money(price)}
+          </span>
+        </div>
+
+        <div class="item-actions" id="actions-${cardSlug}">
+          <button class="add-btn" type="button" 
+                  data-add-category="${c.category}" 
+                  data-add-name="${name}" 
+                  data-add-price="${price}" 
+                  data-add-size="${selectedSize}">
+            ADD +
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+/* ==========================================================================
+   GSAP Smooth Continuous Levitation Physics
+   ========================================================================== */
+const cardFloatTweens = new Map();
+
+function initGSAPLevitation() {
+  document.querySelectorAll(".item-card").forEach((card, index) => {
+    // Smooth harmonic floating bobbing with staggered phases
+    const duration = 3.6 + (index % 5) * 0.4;
+    const yDrift = isMobile ? 4 + (index % 3) * 1.5 : 6 + (index % 4) * 2;
+    const rotZ = isMobile ? 0.3 : 0.6 + (index % 3) * 0.3;
+
+    const tween = gsap.to(card, {
+      y: `+=${yDrift}`,
+      rotationZ: `+=${rotZ}`,
+      duration: duration,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: (index % 6) * 0.2
+    });
+
+    cardFloatTweens.set(card, tween);
+  });
+}
+
+/* ==========================================================================
+   Parallax Cursor-Tracking Tilt Physics (Desktop only)
+   ========================================================================== */
+function initCardTiltPhysics() {
+  document.querySelectorAll(".item-card").forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -10;
+      const rotateY = ((x - centerX) / centerX) * 10;
+
+      card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+      card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+
+      const tween = cardFloatTweens.get(card);
+      if (tween) tween.pause();
+
+      gsap.to(card, {
+        rotationX: rotateX,
+        rotationY: rotateY,
+        z: 25,
+        scale: 1.025,
+        duration: 0.2,
+        ease: "power2.out"
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, {
+        rotationX: 0,
+        rotationY: 0,
+        z: 0,
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.out",
+        onComplete: () => {
+          const tween = cardFloatTweens.get(card);
+          if (tween) tween.resume();
+        }
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   Cart System & Calculation
+   ========================================================================== */
+function getLine(category, name, size="") {
+  return cart.get(itemKey(category, name, size));
+}
+
+function addItem(category, name, basePrice, size="") {
+  const def = MENU.find(c => c.category === category);
+  const pizza = !!def?.pizza;
+  const sizeObj = pizza ? (PIZZA_SIZES.find(s => s.key === size) || PIZZA_SIZES[0]) : null;
+  const unitPrice = pizza ? Math.round(basePrice * sizeObj.multiplier) : Number(basePrice);
+  const key = itemKey(category, name, pizza ? size : "");
+  
+  const existing = cart.get(key);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.set(key, { key, category, name, size: pizza ? size : "", basePrice: Number(basePrice), unitPrice, qty: 1 });
+  }
+
+  refreshUI();
+  updateCardAction(category, name, size);
+  showToast(`Added ${name} to your order!`);
+}
+
+function changeQty(key, delta) {
+  const line = cart.get(key);
+  if (!line) return;
+  line.qty += delta;
+  if (line.qty <= 0) cart.delete(key);
+  
+  refreshUI();
+  const [category, name, size] = key.split("::");
+  updateCardAction(category, name, size || "");
+}
+
+function updateCardAction(category, name, size="") {
+  const c = MENU.find(x => x.category === category);
+  if (!c) return;
+  const cardSlug = slug(category + "-" + name);
+  const target = document.getElementById("actions-" + cardSlug);
+  if (!target) return;
+
+  const sizeKey = c.pizza ? (size || "R") : "";
+  const line = getLine(category, name, sizeKey);
+
+  if (line) {
+    target.innerHTML = `
+      <div class="qty-control">
+        <button type="button" aria-label="Remove one" data-change="${line.key}" data-delta="-1">−</button>
+        <span>${line.qty}</span>
+        <button type="button" aria-label="Add one" data-change="${line.key}" data-delta="1">+</button>
+      </div>
+    `;
+  } else {
+    target.innerHTML = `
+      <button class="add-btn" type="button" 
+              data-add-category="${category}" 
+              data-add-name="${name}" 
+              data-add-price="${c.items.find(i => i[0] === name)[1]}" 
+              data-add-size="${c.pizza ? sizeKey : ""}">
+        ADD +
+      </button>
+    `;
+  }
+}
+
+function totals() {
+  let count = 0, total = 0;
+  for (const l of cart.values()) {
+    count += l.qty;
+    total += l.qty * l.unitPrice;
+  }
+  return { count, total };
+}
+
+function refreshUI() {
+  const { count, total } = totals();
+  document.getElementById("cartCount").textContent = `${count} item${count === 1 ? "" : "s"} selected`;
+  document.getElementById("cartTotal").textContent = money(total);
+  document.getElementById("subtotal").textContent = money(total);
+  document.getElementById("panelTotal").textContent = money(total);
+  
+  const isDineIn = document.getElementById("orderTypeSelect").value === "DINE-IN";
+  document.getElementById("checkoutBtn").textContent = `Place ${isDineIn ? "Dine-in" : "Takeaway"} Order · ${money(total)}`;
+  document.getElementById("checkoutBtn").disabled = count === 0;
+
+  const box = document.getElementById("cartItems");
+  const empty = document.getElementById("cartEmpty");
+
+  if (!count) {
+    box.innerHTML = "";
+    empty.classList.remove("hidden");
+  } else {
+    empty.classList.add("hidden");
+    box.innerHTML = [...cart.values()].map(l => `
+      <div class="cart-line">
+        <div class="cart-line-main">
+          <strong>${l.name}${l.size ? ` · Size ${l.size}` : ""}</strong>
+          <small>${l.category} · ${money(l.unitPrice)} each</small>
+        </div>
+        <div class="qty-control">
+          <button type="button" data-change="${l.key}" data-delta="-1" aria-label="Remove one">−</button>
+          <span>${l.qty}</span>
+          <button type="button" data-change="${l.key}" data-delta="1" aria-label="Add one">+</button>
+        </div>
+        <span class="line-total">${money(l.qty * l.unitPrice)}</span>
+      </div>
+    `).join("");
+  }
+}
+
+/* Category Filter Navigation */
+function setCategory(target) {
+  document.querySelectorAll(".cat-btn").forEach(b => b.classList.toggle("active", b.dataset.target === target));
+  
+  if (target === "all") {
+    document.querySelectorAll(".menu-section").forEach(s => s.classList.remove("hidden"));
+    return;
+  }
+  
+  const section = document.getElementById(target);
+  if (section) {
+    document.querySelectorAll(".menu-section").forEach(s => s.classList.remove("hidden"));
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+categoryStrip.addEventListener("click", e => {
+  const b = e.target.closest(".cat-btn");
+  if (!b) return;
+  setCategory(b.dataset.target);
+});
+
+/* Delegate Interactions: Add / Stepper / Pizza Sizes */
+menuRoot.addEventListener("click", e => {
+  // 1. Pizza Size Switcher
+  const sizeBtn = e.target.closest("[data-size]");
+  if (sizeBtn) {
+    const { category, name, base } = sizeBtn.dataset;
+    const c = MENU.find(x => x.category === category);
+    const size = PIZZA_SIZES.find(s => s.key === sizeBtn.dataset.size);
+    
+    sizeBtn.parentElement.querySelectorAll("button").forEach(b => b.classList.toggle("selected", b === sizeBtn));
+    
+    const calculatedPrice = Math.round(Number(base) * size.multiplier);
+    document.getElementById("price-" + slug(category + "-" + name)).innerHTML = `<span class="from">SIZE ${size.label} </span>${money(calculatedPrice)}`;
+    
+    const addBtn = document.querySelector(`[data-add-category="${CSS.escape(category)}"][data-add-name="${CSS.escape(name)}"]`);
+    if (addBtn) addBtn.dataset.addSize = size.key;
+    
+    updateCardAction(category, name, size.key);
+    return;
+  }
+
+  // 2. Add Button
+  const add = e.target.closest("[data-add-category]");
+  if (add) {
+    addItem(add.dataset.addCategory, add.dataset.addName, add.dataset.addPrice, add.dataset.addSize || "");
+    return;
+  }
+
+  // 3. Quantity Stepper
+  const change = e.target.closest("[data-change]");
+  if (change) {
+    changeQty(change.dataset.change, Number(change.dataset.delta));
+  }
+});
+
+document.getElementById("cartItems").addEventListener("click", e => {
+  const b = e.target.closest("[data-change]");
+  if (b) changeQty(b.dataset.change, Number(b.dataset.delta));
+});
+
+/* Search Filter */
+searchInput.addEventListener("input", () => {
+  const q = searchInput.value.trim().toLowerCase();
+  
+  document.querySelectorAll(".menu-section").forEach(section => {
+    let visible = 0;
+    section.querySelectorAll(".item-card").forEach(card => {
+      const show = card.dataset.searchText.includes(q);
+      card.classList.toggle("hidden", !show);
+      if (show) visible++;
+    });
+    section.classList.toggle("hidden", visible === 0);
+  });
+
+  if (q) {
+    document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+  } else {
+    setCategory("all");
+  }
+});
+
+/* Customer & Cart Drawer */
+const overlay = document.getElementById("cartOverlay");
+const CUSTOMER_STORAGE_KEY = "feelingHungryCustomer";
+
+function readSavedCustomer() {
+  try {
+    const raw = localStorage.getItem(CUSTOMER_STORAGE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (typeof data.name !== "string" || typeof data.mobile !== "string") return null;
+    return data;
+  } catch(err) {
+    return null;
+  }
+}
+
+function fillReturningCustomer() {
+  const saved = readSavedCustomer();
+  const nameInput = document.getElementById("customerName");
+  const mobileInput = document.getElementById("customerMobile");
+  const welcome = document.getElementById("returningWelcome");
+
+  if (saved && saved.name.trim() && saved.mobile.trim()) {
+    if (!nameInput.value.trim()) nameInput.value = saved.name;
+    if (!mobileInput.value.trim()) mobileInput.value = saved.mobile;
+    welcome.textContent = `Welcome back to Feeling Hungry, ${nameInput.value.trim() || saved.name}!`;
+    welcome.classList.remove("hidden");
+  } else {
+    welcome.textContent = "";
+    welcome.classList.add("hidden");
+  }
+}
+
+document.getElementById("openCart").addEventListener("click", () => {
+  fillReturningCustomer();
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+});
+
+function closeCart() {
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("closeCart").addEventListener("click", closeCart);
+overlay.addEventListener("click", e => { if (e.target === overlay) closeCart(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeCart(); });
+
+function showToast(message) {
+  const t = document.getElementById("toast");
+  t.textContent = message;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+const orderTypeSelect = document.getElementById("orderTypeSelect");
+const tableNumberField = document.getElementById("tableNumberField");
+const tableNumberInput = document.getElementById("tableNumber");
+
+function updateOrderTypeUI() {
+  const isDineIn = orderTypeSelect.value === "DINE-IN";
+  tableNumberField.classList.toggle("hidden", !isDineIn);
+  tableNumberInput.required = isDineIn;
+  tableNumberInput.disabled = !isDineIn;
+  if (!isDineIn) tableNumberInput.value = "";
+  document.getElementById("checkoutBtn").textContent = `Confirm ${isDineIn ? "Dine-in" : "Takeaway"} Order · ${money(totals().total)}`;
+}
+
+orderTypeSelect.addEventListener("change", updateOrderTypeUI);
+updateOrderTypeUI();
+
+const mobileField = document.getElementById("customerMobile");
+mobileField.addEventListener("input", () => {
+  mobileField.value = mobileField.value.replace(/\D/g, "").slice(0, 10);
+});
+
+async function submitOrderToPOS(orderData) {
+  console.log("Order submitted for POS integration:", orderData);
+  return { success: true, mode: "demo" };
+}
+
+document.getElementById("checkoutBtn").addEventListener("click", async () => {
+  const selectedType = orderTypeSelect.value;
+  const isDineIn = selectedType === "DINE-IN";
+  const tableNumber = isDineIn ? tableNumberInput.value.trim() : "N/A";
+  
+  if (isDineIn && !tableNumber) {
+    tableNumberInput.focus();
+    showToast("Please enter your Table Number.");
+    return;
+  }
+
+  const { count, total } = totals();
+  if (!count) {
+    showToast("Your cart is empty. Add something delicious!");
+    return;
+  }
+
+  const customerName = document.getElementById("customerName").value.trim();
+  const customerMobile = document.getElementById("customerMobile").value.trim();
+  const paymentMethod = document.getElementById("paymentMethod").value;
+
+  if (!customerName) {
+    document.getElementById("customerName").focus();
+    showToast("Please enter your name.");
+    return;
+  }
+
+  if (!/^[0-9]{10}$/.test(customerMobile)) {
+    document.getElementById("customerMobile").focus();
+    showToast("Please enter a valid 10-digit mobile number.");
+    return;
+  }
+
+  if (!paymentMethod) {
+    document.getElementById("paymentMethod").focus();
+    showToast("Please select your payment method.");
+    return;
+  }
+
+  const orderData = {
+    orderId: "FH-" + Date.now().toString(36).toUpperCase(),
+    type: selectedType,
+    table: tableNumber,
+    tableNumber: tableNumber,
+    customerName: customerName,
+    customerMobile: customerMobile,
+    paymentMethod: paymentMethod,
+    items: [...cart.values()].map(l => ({
+      category: l.category,
+      name: l.name,
+      ...(l.size ? { size: l.size } : {}),
+      unitPrice: l.unitPrice,
+      quantity: l.qty,
+      lineTotal: l.unitPrice * l.qty
+    })),
+    totalPrice: total,
+    specialNotes: document.getElementById("specialNotes").value.trim(),
+    orderType: selectedType === "DINE-IN" ? "dine-in" : "takeaway",
+    status: "received",
+    createdAt: new Date().toISOString(),
+    currency: "INR"
+  };
+
+  try {
+    const result = await submitOrderToPOS(orderData);
+    if (result && result.success === false) throw new Error("Order submission failed");
+
+    try {
+      localStorage.setItem(CUSTOMER_STORAGE_KEY, JSON.stringify({ name: customerName, mobile: customerMobile }));
+    } catch(e) {}
+
+    console.log("Order Placed Successfully:", JSON.stringify(orderData, null, 2));
+    
+    cart.clear();
+    refreshUI();
+    closeCart();
+
+    document.getElementById("tableNumber").value = "";
+    document.getElementById("orderTypeSelect").value = "DINE-IN";
+    updateOrderTypeUI();
+    document.getElementById("customerName").value = customerName;
+    document.getElementById("customerMobile").value = customerMobile;
+    document.getElementById("paymentMethod").value = "";
+    document.getElementById("specialNotes").value = "";
+
+    showToast("Order placed successfully! Preparing your food.");
+    alert("Order Created (Demo Mode)!\n\n" + JSON.stringify(orderData, null, 2));
+  } catch(err) {
+    console.error(err);
+    showToast("Could not place order. Please try again.");
+  }
+});
+
+/* ==========================================================================
+   Bootstrapping
+   ========================================================================== */
+window.addEventListener("DOMContentLoaded", () => {
+  renderMenu();
+  refreshUI();
+  initThreeHimalayanScene();
+  animateThree();
+});
+</script>
+</body>
+</html>
