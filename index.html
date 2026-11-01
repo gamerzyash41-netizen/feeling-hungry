@@ -1065,6 +1065,7 @@ body {
 
 <!-- Warm Footer -->
 <footer class="shell footer">
+  <div id="menuConnectionStatus" role="status" aria-live="polite" style="margin-bottom:8px;color:#e9c46a">Connecting to the live Feeling Hungry menu…</div>
   FEELING HUNGRY · HIMALAYAN & CHINESE CULINARY LAB · SERVED FRESH & WARM
 </footer>
 
@@ -1166,7 +1167,7 @@ body {
    ========================================================================== */
 const ITEM_DESCRIPTIONS = {"Aalu Tikki Wrap":"A delicious wrap cut in half revealing a golden-fried spiced potato patty, fresh lettuce, and tangy sauce.","Veg Wrap":"A fresh flatbread tightly rolled around assorted grilled vegetables and creamy mayo, cut diagonally.","Paneer Wrap":"A toasted wrap oozing with soft paneer cubes, crunchy onions, and mint chutney.","Crunchy Wrap":"A perfectly grilled wrap cut in half, showing a deep-fried crunchy vegetable filling and melted cheese.","Veg Full Loaded Wrap":"A thick, bursting wrap stuffed with vegetables, paneer, and rich sauces, resting on a dark slate board.","Cheese Wrap":"A golden toasted wrap pulled apart to show thick mozzarella and cheddar cheese stretching out.","Paneer Tikka Wrap":"A wrap cut open to expose bright red, smoky tandoori paneer chunks, crisp capsicum, and mint sauce.","Tandoori Soya Chaap Wrap":"A tightly rolled wrap filled with spicy, red tandoori soya chaap pieces and fresh onion rings.","Tandoori Malai Chaap Wrap":"A delicious wrap filled with rich, creamy white malai chaap and mild spices, cut in half on a rustic board.","Paneer Malai Tikka Wrap":"A grilled wrap exposing melt-in-the-mouth creamy white paneer tikka with gentle char marks.","Veg Noodles":"A steaming bowl of classic stir-fried veg noodles tossed with shredded cabbage, carrots, and soy sauce.","Chilli Garlic Noodle":"Spicy, glossy noodles tossed with burnt garlic bits and red chili flakes, garnished with spring onions.","Schezwan Hakka Noodles":"A vibrant bowl of Hakka noodles coated in fiery red Schezwan sauce, with bell peppers and chopsticks resting on the bowl.","Hakka Noodles":"Perfectly non-sticky Hakka noodles tossed with fresh wok-fried vegetables, served in a black ceramic bowl.","Paneer Noodles":"Delicious wok-tossed noodles generously topped with soft, fried paneer cubes and green peppers.","Schezwan Paneer Noodles":"Spicy red noodles tossed with paneer chunks in a rich Schezwan sauce, steaming hot.","Veg Maggi":"A comforting, hot bowl of classic masala Maggi noodles with mixed vegetables, garnished with coriander.","Aloo Tikki Burger":"A classic burger with a crispy golden potato patty, fresh tomato, onion slice, and creamy mayo in a toasted bun.","Cheese Burger":"A mouth-watering burger with a thick patty and a perfectly melted square of yellow cheese dripping over the sides.","Paneer Burger":"A delicious burger featuring a thick, crispy-fried paneer patty, crisp lettuce, and spicy sauce.","Maharaja Burger":"A towering, double-decker tall burger loaded with multiple crispy patties, double cheese, jalapenos, and rich sauces.","KFC Style Burger":"An ultra-crispy, craggy, golden-fried zinger-style patty inside a premium sesame bun with fresh iceberg lettuce and mayo.","Veg Momos":"A bamboo steamer basket filled with beautifully pleated, translucent steamed veg momos.","Paneer Momos":"Steamed paneer momos in a bamboo basket, showing a soft, delicate texture, served with fiery red chutney.","Paneer Butter Momos":"Glossy momos tossed in a rich, creamy, orange butter masala gravy, garnished with fresh cream swirls.","Paneer Kurkure Momos":"Deep-fried momos with a heavily crusted, ultra-crunchy cornflake exterior, golden brown and appetizing.","Chilli Momos":"Fried momos tossed in a dark, glossy soy-chili sauce with thick cuts of bell peppers and onions.","Gravy Momos":"Momos submerged in a thick, rich, flavorful red gravy, garnished with coriander leaves.","Afgani Momos":"Creamy, white, rich Afghani momos coated in a malai marinade with gentle tandoor char marks.","Kurkure Cheese Corn Momos":"Extra-crunchy fried momos, split open slightly to reveal melted cheese and sweet corn inside.","Gyoza Momos":"Pan-fried momos with a perfectly crispy, golden-brown bottom and soft steamed top, served with soy dipping sauce.","Veg Cheese Corn Momos":"Steamed momos filled with gooey cheese and yellow corn, soft and appetizing.","Peri Peri Momos":"Crispy fried momos generously dusted with vibrant red peri-peri spice mix, served on a dark plate.","Veg Manchurian":"Golden fried vegetable dumplings tossed in a thick, dark, glossy brown Manchurian sauce with spring onions.","Chilli Mushroom":"Plump mushrooms wok-tossed in a spicy, glossy chili sauce with green capsicum and onions.","Honey Chilli Potato":"Crispy potato wedges coated in a sticky, glossy, sweet and spicy red sauce, garnished with white sesame seeds.","Honey Chilli Cauliflower":"Crispy cauliflower florets tossed in a glossy honey-chili glaze, topped with sesame seeds.","Chilli Paneer":"A premium bowl of Chilli Paneer dry, featuring perfectly fried paneer cubes coated in a dark, rich, glossy soy-chili sauce with thick-cut bell peppers.","Paneer 65":"Vibrant red, spicy, crispy-fried paneer cubes tossed with curry leaves and green chilies.","Veg Spring Rolls":"Golden, crispy, flaky spring rolls cut at an angle, showing a steaming hot vegetable filling inside.","KFC Veg Spring Rolls":"Extra-crunchy, crusted spring rolls with a thick, golden-fried KFC-style coating, served with sweet chili sauce.","Paneer Spring Rolls":"Crispy spring rolls sliced open to reveal a rich paneer and veggie filling, appetizing and hot.","KFC Paneer Spring Rolls":"Ultra-crispy, heavily breaded spring rolls stuffed with paneer, golden brown and crunchy.","Veg Fried Rice":"A perfectly shaped dome of wok-tossed vegetable fried rice with visible carrots, beans, and spring onions.","Schezwan Fried Rice":"A vibrant, spicy red Schezwan fried rice bowl, steaming hot and garnished with scallions.","Paneer Fried Rice":"Flavorful fried rice generously topped with golden-fried paneer cubes.","Mushroom Fried Rice":"Wok-tossed fried rice featuring savory, dark sautéed mushrooms and green onions.","Veg Clear Soup":"A warm, comforting bowl of crystal-clear broth with finely diced colorful vegetables.","Sweet Corn Soup":"A thick, creamy, yellow sweet corn soup in a white bowl, garnished with a few whole corn kernels and herbs.","Hot & Sour Soup":"A dark, rich, steaming bowl of hot and sour soup with tofu, mushrooms, and bamboo shoots, showing a spicy chili oil slick on top.","Manchow Soup":"A dark, savory brown Manchow soup topped generously with crispy fried noodles and fresh coriander.","Mushroom Soup":"A creamy, earthy, rich brown mushroom soup garnished with a swirl of fresh cream and cracked black pepper.","Paneer Soup":"A comforting, flavorful soup bowl featuring soft paneer cubes floating in a rich, savory broth.","Veg Grilled Sandwich":"A perfectly pressed sandwich with golden grill marks, cut in triangles, showing a loaded vegetable filling.","Cheese Grilled Sandwich":"A toasted sandwich pulled apart to show hot, melted, gooey cheese stretching beautifully between the slices.","Paneer Grilled Sandwich":"A thick, grilled sandwich revealing a spicy, rich paneer tikka filling with onions and peppers.","Chatpata Toast":"Crispy, golden-brown toast topped with a spicy, tangy, colorful vegetable mix and sev.","Butter Honey Toast":"Perfectly toasted golden bread glistening with melting butter and a drizzle of rich, amber honey.","Hungry Toast":"A signature, fully loaded open-faced toast piled high with melted cheese, veggies, and sauces.","Jam Toast":"Crispy golden toast generously spread with vibrant, glossy, ruby-red mixed fruit jam.","French Fries":"A classic paper cone overflowing with perfectly golden, crispy, salted French fries.","Peri Peri Fries":"Crispy French fries heavily coated in a vibrant red, spicy peri-peri seasoning.","Masala Fries":"Golden fries tossed in aromatic, dark Indian masala spices, served on a rustic board.","Potato Twister":"A spiral-cut whole potato on a wooden skewer, deep-fried to a golden crisp and dusted with spices.","Feeling Hungry Spcl. Thukpa":"A large, comforting bowl of authentic Thukpa noodle soup, rich broth loaded with fresh vegetables and long noodles.","Mushroom Duplex 12 pcs":"Deep-fried, crispy stuffed mushrooms, golden brown and crunchy, served on a slate platter with dip.","Veg Jhol Momos":"Authentic Nepali Veg momos submerged in a vibrant, orange, sesame-tomato soup base, garnished with fresh coriander.","Special Paneer Jhol Momos":"Plump paneer momos drowning in a rich, spicy, flavorful Nepali jhol broth.","Special Tea":"A classic, steaming cup of rich, milky Indian masala chai in a traditional clay kulhad or glass.","Coffee":"Smooth, light brown coffee-flavored ice cream, creamy and rich, served with a single coffee bean on top.","Cold Coffee":"A tall, frosted glass of creamy, thick cold coffee with a frothy top and a drizzle of chocolate syrup down the sides.","Mint Mojito":"A refreshing, bubbly glass of Mint Mojito filled with crushed ice, fresh mint leaves, and lime slices, with condensation on the glass.","Watermelon Mojito":"A vibrant, ruby-red iced mojito with fresh watermelon chunks, mint, and lime wedges in a tall glass.","Green Apple Mojito":"A bright, neon-green, refreshing mojito over ice, garnished with thin slices of green apple and mint.","Blue Berry Mojito":"A deep purple-blue, icy mojito loaded with fresh blueberries and mint leaves, visually stunning.","Bubblegum Mojito":"A fun, bright pink and blue gradient mojito over ice, colorful and refreshing.","Lemon Soda":"A classic, fizzy glass of fresh lime soda with ice cubes, a lemon wheel, and rising bubbles.","Chocolate Shake":"A highly indulgent, thick chocolate milkshake in a tall glass, topped with a mountain of whipped cream and chocolate chips.","Vanilla Shake":"A classic, creamy, pure white vanilla milkshake topped with a cherry and whipped cream.","Strawberry Shake":"A beautiful, pastel-pink strawberry milkshake with strawberry syrup drizzled on the inside of the glass.","Oreo Shake":"A thick milkshake blended with crushed Oreo cookies, topped with whipped cream and an entire Oreo cookie.","Tandoori Chaap":"Sizzling, bright red, smoky Tandoori Soya Chaap on skewers, with charred edges, served with onion rings and lemon.","Malai Chaap":"Tender soya chaap heavily coated in a rich, creamy, white malai marinade with gentle tandoor char marks.","Masala Chaap":"Spicy, dark-roasted masala soya chaap chunks tossed in a thick, flavorful dry spice mix.","Lemon Masala Chaap":"Tangy, spicy soya chaap chunks squeezed with fresh lemon juice and dusted with chaat masala.","Achari Chaap":"Vibrant orange soya chaap marinated in tangy Indian pickle (achar) spices, roasted to perfection.","Afghani Malai Chaap":"Extremely rich, cashew and cream marinated soya chaap, roasted in the tandoor, creamy and smoky.","Puri Peri Masala Chaap":"Tandoor-roasted soya chaap chunks dusted heavily with fiery red peri-peri spice powder.","Tandoori Malai Momos":"Plump momos coated in a thick, creamy white malai marinade, roasted in a tandoor with slight charring.","Tandoori Masala Momos":"Spicy, deep-red tandoori momos on a sizzling platter, smoky and appetizing.","Tandoori Lemon Masala Momos":"Tangy and spicy red tandoori momos served with a wedge of lemon and mint chutney.","Tandoori Achari Momos":"Tandoor-roasted momos marinated in tangy, bright orange pickling spices (achar).","Tandoori Lemon Malai Momos":"Creamy, white tandoori momos with a hint of tangy lemon zest and mild spices.","Tandoori Afghani Momos":"Ultra-rich, creamy, malai-coated momos cooked in a clay oven, smoky and decadent.","Tandoori Paneer Tikka":"A delicious pizza topped with smoky, bright red tandoori paneer tikka chunks, onions, and capsicum.","Malai Paneer Tikka":"Soft, melt-in-the-mouth paneer cubes coated in a thick, rich, white cashew-cream marinade with gentle grill marks.","Achari Paneer Tikka":"Tangy, vibrant orange paneer tikka marinated in Indian pickling spices, served on a rustic board.","Mushroom Tikka":"Plump whole mushrooms marinated in red tandoori spices and roasted until tender and smoky.","Cheesy Corn":"A freshly baked pizza with a golden crust, loaded with melted mozzarella cheese and sweet yellow corn.","Cheesy Mushroom":"A hot, cheesy pizza topped generously with sliced, roasted earthy mushrooms.","Cheesy Tomato":"A classic pizza with a bubbling cheese layer topped with fresh, juicy red tomato slices.","Margherita":"A classic Margherita pizza with a perfect blistered crust, rich red tomato sauce, melted mozzarella, and fresh basil leaves.","Farm Fresh":"A colorful pizza topped with fresh crunchy bell peppers, onions, tomatoes, and mushrooms over melted cheese.","Paneer Makhni":"An Indian-fusion pizza with a rich, orange, creamy makhani sauce base, topped with paneer cubes and coriander.","Fresh Pizza":"A vibrant, freshly baked pizza loaded with assorted garden vegetables and gooey cheese.","Delight Pizza":"An appetizing pizza fully loaded with premium toppings, olives, and jalapenos on a golden crust.","Spicy Achari":"A tangy, spicy pizza topped with paneer, onions, and flavorful Indian achari (pickle) spices.","Tandoori Pizza":"An Indian-style pizza with a spicy tandoori sauce base, loaded with veggies and smoky flavors.","Veg Hawaiian":"A sweet and savory pizza topped with melted cheese, jalapenos, and chunks of sweet pineapple.","Gourmet":"A premium, artisan-style pizza with a perfect crust, black olives, exotic veggies, and a drizzle of olive oil.","Chilly Pizza":"A fiery, spicy pizza loaded with green chilies, red paprika, and spicy seasoning over melted cheese.","Spicy Paneer":"A hot and spicy pizza generously topped with chili-marinated paneer cubes and red peppers.","Veg Deluxe":"A heavily loaded deluxe pizza overflowing with every vegetable topping, mushrooms, olives, and extra cheese.","Veg Loaded":"The ultimate vegetable pizza, completely covered in colorful toppings with cheese stretching from a sliced piece.","Mix Veg":"A simple, delicious, home-style pizza with a generous mix of capsicum, onion, and tomato over melted cheese.","Red Sauce Pasta":"A bowl of perfectly cooked penne pasta tossed in a rich, tangy, vibrant red tomato basil sauce.","White Sauce Pasta":"A creamy, rich bowl of Alfredo white sauce pasta loaded with sweet corn and black olives.","Pink Sauce Pasta":"Penne pasta coated in a luxurious, creamy pink mix of tomato and cheese sauces, garnished with parmesan.","Arrabiata Pasta":"Spicy, fiery red Arrabiata pasta with visible chili flakes, garlic, and fresh basil leaves.","Tandoori Pasta":"A unique fusion pasta tossed in a smoky, spicy, orange-red tandoori cream sauce with bell peppers.","Peri Peri Pasta":"A creamy, spicy pasta with a vibrant orange-red hue from peri-peri seasoning, appetizing and hot.","Masala Pasta":"An Indian-style macaroni pasta tossed with onions, tomatoes, and rich, earthy Indian spices.","Veggie Loaded Pasta":"A colorful bowl of pasta overflowing with broccoli, bell peppers, zucchini, and olives in a light sauce.","Pesto Pasta":"Penne pasta generously coated in a vibrant, bright green, oily basil pesto sauce, topped with pine nuts.","Alfredo Pasta":"A highly indulgent, thick, glossy white cheese Alfredo pasta, steaming hot in a wide ceramic bowl.","Cheesy Pasta":"A baked pasta dish with a thick, golden-brown crust of melted, bubbling mozzarella cheese on top.","Paneer Tikka Pasta":"A rich, creamy pasta bowl topped with smoky, charred red paneer tikka chunks.","Corn & Cheese Pasta":"A comforting, creamy white pasta loaded with sweet yellow corn kernels and gooey melted cheese.","Vanilla":"Two perfect, round scoops of pure white vanilla ice cream in a glass bowl, elegant and simple.","Chocolate":"Rich, dark, creamy chocolate ice cream scoops topped with a light dusting of cocoa powder.","Strawberry":"Pastel pink strawberry ice cream with visible chunks of real strawberries, served in a waffle cone.","Butterscotch":"Creamy yellow butterscotch ice cream dotted with crunchy, golden caramelized praline bits.","Mango":"Vibrant, bright yellow-orange mango ice cream scoops, looking smooth, creamy, and tropical.","Black Current":"Deep purple blackcurrant ice cream with rich, dark berry swirls throughout the scoop.","Cookies & Cream":"Creamy white ice cream heavily speckled with dark, crushed Oreo cookie crumbles.","Rajbhog":"Rich, golden-yellow traditional Indian Rajbhog ice cream, loaded with visible saffron strands and chopped nuts.","Pista":"Pale green pistachio ice cream heavily garnished with freshly chopped, bright green pistachio nuts.","Mint Chocolate Chip":"Refreshing, bright green mint ice cream loaded with dark, rich chocolate chips.","Hazelnut":"Indulgent, light brown hazelnut ice cream with swirls of chocolate and roasted hazelnut pieces.","Kesar Pista":"Golden-yellow saffron ice cream mixed with bright green pistachio bits, rich and authentic.","Chocolate Chip":"Classic vanilla ice cream generously studded with large, dark chocolate chunks.","Bubble Gum":"Fun, vibrant pink and blue swirled bubblegum flavored ice cream, bright and playful.","Ferrero Rocher":"Luxurious, rich chocolate-hazelnut ice cream garnished with crushed Ferrero Rocher chocolates and gold flakes."};
 
-const MENU = [
+let MENU = [
  {category:"Momos",emoji:"🥟",items:[["Veg Momos",79],["Paneer Momos",120],["Paneer Butter Momos",139],["Paneer Kurkure Momos",169],["Chilli Momos",169],["Gravy Momos",170],["Afgani Momos",169],["Kurkure Cheese Corn Momos",179],["Gyoza Momos",139],["Veg Cheese Corn Momos",159],["Peri Peri Momos",129]]},
  {category:"Special Thupka & Nepali Special",emoji:"🍜",items:[["Feeling Hungry Spcl. Thukpa",80],["Mushroom Duplex 12 pcs",220],["Veg Jhol Momos",120],["Special Paneer Jhol Momos",150]]},
  {category:"Noodles",emoji:"🥢",items:[["Veg Noodles",79],["Chilli Garlic Noodle",99],["Schezwan Hakka Noodles",120],["Hakka Noodles",99],["Paneer Noodles",120],["Schezwan Paneer Noodles",149],["Veg Maggi",59]]},
@@ -1197,6 +1198,28 @@ const cart = new Map();
 const money = n => "₹" + Number(n).toLocaleString("en-IN", {maximumFractionDigits: 2});
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const itemKey = (category, name, size="") => `${category}::${name}${size ? "::"+size : ""}`;
+const htmlEscape = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+const FH_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCAfE0uOPa1hOPoECfNksgkTBAtVef-e1A",
+  authDomain: "feeling-hungry-3373e.firebaseapp.com",
+  projectId: "feeling-hungry-3373e",
+  storageBucket: "feeling-hungry-3373e.firebasestorage.app",
+  messagingSenderId: "266617494223",
+  appId: "1:266617494223:web:de8b019b19f1e3a25335ba",
+  measurementId: "G-XNV8ZMT4XE"
+};
+let menuFirebaseApp = null, menuDb = null, menuAuth = null, menuFs = null;
+let menuFirebaseReady = false, publicMenuReady = false, publicMenuUnsubscribe = null;
+let menuFirebaseError = "";
+let orderSubmitInProgress = false;
+const MENU_CATEGORY_EMOJI = {
+  "Momos":"🥟","Momo":"🥟","Noodles":"🍜","Burger":"🍔","Burgers":"🍔","Wraps":"🌯",
+  "Pasta":"🍝","Pizza":"🍕","Pizzas":"🍕","Beverage":"🥤","Ice Cream":"🍨",
+  "Chinese Specials":"🥡","Spring Rolls":"🥢","Fried Rice":"🍚","Soup":"🥣",
+  "Fries":"🍟","Nepali Special":"🥟","Special Thupka":"🍲","Tandoori Chaap":"🍢",
+  "Paneer Tikka":"🍢","Combos":"🎁","Sandwich":"🥪"
+};
+
 
 /* ==========================================================================
    Three.js Himalayan Cafe Scene: Floating Momos, Chilies, Star Anise & Leaves
@@ -1477,9 +1500,13 @@ const searchInput = document.getElementById("searchInput");
 
 function renderMenu() {
   // Category Pill Bar
+  if (typeof cardFloatTweens !== 'undefined') {
+    cardFloatTweens.forEach(tween => { try { tween.kill(); } catch (_) {} });
+    cardFloatTweens.clear();
+  }
   categoryStrip.innerHTML = 
     `<button class="cat-btn active" data-target="all"><span class="emoji">🏔️</span> All Items</button>` +
-    MENU.map(c => `<button class="cat-btn" data-target="${slug(c.category)}"><span class="emoji">${c.emoji}</span> ${c.category}</button>`).join("");
+    MENU.map(c => `<button class="cat-btn" data-target="${slug(c.category)}"><span class="emoji">${c.emoji}</span> ${htmlEscape(c.category)}</button>`).join("");
 
   // Menu Sections with High-Efficiency Matrix Grid (Simultaneous Multi-Card Viewing)
   menuRoot.innerHTML = MENU.map(c => `
@@ -1493,7 +1520,7 @@ function renderMenu() {
       </div>
       
       <div class="items-grid">
-        ${c.items.map(([name, price]) => renderCard(c, name, price)).join("")}
+        ${c.items.map(([name, price, menuItemId]) => renderCard(c, name, price, menuItemId)).join("")}
       </div>
     </section>
   `).join("");
@@ -1504,72 +1531,57 @@ function renderMenu() {
   }
 }
 
-function renderCard(c, name, price) {
+function renderCard(c, name, price, menuItemId="") {
   const cardSlug = slug(c.category + "-" + name);
   const selectedSize = c.pizza ? "R" : "";
   const desc = ITEM_DESCRIPTIONS[name] || "Prepared with fresh spices in our Himalayan wok.";
-  
+  const safeName = htmlEscape(name), safeCategory = htmlEscape(c.category), safeDesc = htmlEscape(desc);
+  const safeId = htmlEscape(menuItemId);
   return `
-    <article class="item-card" 
+    <article class="item-card"
              id="card-${cardSlug}"
              data-card-slug="${cardSlug}"
-             data-category="${c.category}" 
-             data-name="${name}" 
-             data-base-price="${price}"
-             data-search-text="${(name + ' ' + c.category).toLowerCase()}">
+             data-category="${safeCategory}"
+             data-name="${safeName}"
+             data-base-price="${Number(price)||0}"
+             data-search-text="${htmlEscape((name + ' ' + c.category).toLowerCase())}">
       <div class="card-glare"></div>
-      
       <div>
         <div class="card-top">
-          <div class="food-icon-circle" aria-label="${name}">
-            <span>${c.emoji}</span>
-          </div>
+          <div class="food-icon-circle" aria-label="${safeName}"><span>${c.emoji}</span></div>
           <div class="item-info">
-            <span class="item-badge">${c.category}</span>
-            <h3>${name}</h3>
+            <span class="item-badge">${safeCategory}</span>
+            <h3>${safeName}</h3>
           </div>
         </div>
-
         <div class="item-info">
-          <p class="item-desc" title="${desc}">${desc}</p>
-          
+          <p class="item-desc" title="${safeDesc}">${safeDesc}</p>
           ${c.pizza ? `
             <div class="pizza-sizes" aria-label="Select Pizza Size">
               ${PIZZA_SIZES.map(s => `
-                <button type="button" 
-                        class="size-btn ${s.key === "R" ? "selected" : ""}" 
-                        data-size="${s.key}" 
-                        data-category="${c.category}" 
-                        data-name="${name}" 
-                        data-base="${price}">
+                <button type="button" class="size-btn ${s.key === "R" ? "selected" : ""}"
+                        data-size="${s.key}" data-category="${safeCategory}"
+                        data-name="${safeName}" data-base="${Number(price)||0}">
                   ${s.label}
-                </button>
-              `).join("")}
-            </div>
-          ` : ''}
+                </button>`).join("")}
+            </div>` : ''}
         </div>
       </div>
-
       <div class="card-bottom">
         <div class="price-box">
           ${c.pizza ? '<span class="from">STARTING</span>' : '<span class="from">PRICE</span>'}
-          <span class="price-tag" id="price-${cardSlug}">
-            ${money(price)}
-          </span>
+          <span class="price-tag" id="price-${cardSlug}">${money(price)}</span>
         </div>
-
         <div class="item-actions" id="actions-${cardSlug}">
-          <button class="add-btn" type="button" 
-                  data-add-category="${c.category}" 
-                  data-add-name="${name}" 
-                  data-add-price="${price}" 
-                  data-add-size="${selectedSize}">
-            ADD +
-          </button>
+          <button class="add-btn" type="button"
+                  data-add-category="${safeCategory}"
+                  data-add-name="${safeName}"
+                  data-add-price="${Number(price)||0}"
+                  data-add-size="${selectedSize}"
+                  data-add-menu-id="${safeId}">ADD +</button>
         </div>
       </div>
-    </article>
-  `;
+    </article>`;
 }
 
 /* ==========================================================================
@@ -1654,7 +1666,7 @@ function getLine(category, name, size="") {
   return cart.get(itemKey(category, name, size));
 }
 
-function addItem(category, name, basePrice, size="") {
+function addItem(category, name, basePrice, size="", menuItemId="") {
   const def = MENU.find(c => c.category === category);
   const pizza = !!def?.pizza;
   const sizeObj = pizza ? (PIZZA_SIZES.find(s => s.key === size) || PIZZA_SIZES[0]) : null;
@@ -1665,7 +1677,7 @@ function addItem(category, name, basePrice, size="") {
   if (existing) {
     existing.qty++;
   } else {
-    cart.set(key, { key, category, name, size: pizza ? size : "", basePrice: Number(basePrice), unitPrice, qty: 1 });
+    cart.set(key, { key, category, name, menuItemId: String(menuItemId||""), size: pizza ? size : "", basePrice: Number(basePrice), unitPrice, qty: 1 });
   }
 
   refreshUI();
@@ -1707,8 +1719,9 @@ function updateCardAction(category, name, size="") {
       <button class="add-btn" type="button" 
               data-add-category="${category}" 
               data-add-name="${name}" 
-              data-add-price="${c.items.find(i => i[0] === name)[1]}" 
-              data-add-size="${c.pizza ? sizeKey : ""}">
+              data-add-price="${c.items.find(i => i[0] === name)[1]}"
+              data-add-size="${c.pizza ? sizeKey : ""}"
+              data-add-menu-id="${htmlEscape(c.items.find(i => i[0] === name)?.[2] || "")}">
         ADD +
       </button>
     `;
@@ -1733,7 +1746,8 @@ function refreshUI() {
   
   const isDineIn = document.getElementById("orderTypeSelect").value === "DINE-IN";
   document.getElementById("checkoutBtn").textContent = `Place ${isDineIn ? "Dine-in" : "Takeaway"} Order · ${money(total)}`;
-  document.getElementById("checkoutBtn").disabled = count === 0;
+  document.getElementById("checkoutBtn").disabled = count === 0 || !menuFirebaseReady || !publicMenuReady || orderSubmitInProgress;
+  if (orderSubmitInProgress) document.getElementById("checkoutBtn").textContent = "Submitting order…";
 
   const box = document.getElementById("cartItems");
   const empty = document.getElementById("cartEmpty");
@@ -1806,7 +1820,15 @@ menuRoot.addEventListener("click", e => {
   // 2. Add Button
   const add = e.target.closest("[data-add-category]");
   if (add) {
-    addItem(add.dataset.addCategory, add.dataset.addName, add.dataset.addPrice, add.dataset.addSize || "");
+    if (!menuFirebaseReady) {
+      showToast(menuFirebaseError || "Connecting to Firebase. Please wait…");
+      return;
+    }
+    if (!publicMenuReady) {
+      showToast("Live POS menu is not published yet. Open the POS and wait for its catalogue sync, then refresh this menu.");
+      return;
+    }
+    addItem(add.dataset.addCategory, add.dataset.addName, add.dataset.addPrice, add.dataset.addSize || "", add.dataset.addMenuId || "");
     return;
   }
 
@@ -1919,12 +1941,59 @@ mobileField.addEventListener("input", () => {
   mobileField.value = mobileField.value.replace(/\D/g, "").slice(0, 10);
 });
 
+async function waitForOrderProcessing(requestId, timeoutMs=15000) {
+  if (!menuFs || !menuDb) return {status:"pending"};
+  return new Promise(resolve => {
+    let finished = false, stop = null;
+    const finish = result => {
+      if (finished) return;
+      finished = true;
+      if (stop) stop();
+      clearTimeout(timer);
+      resolve(result);
+    };
+    const timer = setTimeout(() => finish({status:"pending"}), timeoutMs);
+    stop = menuFs.onSnapshot(menuFs.doc(menuDb,"onlineOrderRequests",requestId), snap => {
+      if (!snap.exists()) return finish({status:"missing"});
+      const data = snap.data() || {};
+      if (["accepted","rejected","error"].includes(data.status)) finish(data);
+    }, error => {
+      console.error("Order status listener error:", error);
+      finish({status:"pending",message:error.message});
+    });
+  });
+}
+
 async function submitOrderToPOS(orderData) {
-  console.log("Order submitted for POS integration:", orderData);
-  return { success: true, mode: "demo" };
+  if (!menuFirebaseReady || !menuAuth?.currentUser) throw new Error(menuFirebaseError || "Digital Menu is not connected to Firebase yet.");
+  if (!publicMenuReady) throw new Error("The live POS menu is still syncing. Please try again in a moment.");
+  const requestItems = (orderData.items || []).map(item => ({
+    menuItemId: String(item.menuItemId || ""),
+    qty: Number(item.quantity || 0),
+    note: String(orderData.specialNotes || "").trim().slice(0,200)
+  }));
+  if (!requestItems.length || requestItems.some(item => !item.menuItemId || !Number.isInteger(item.qty) || item.qty < 1 || item.qty > 20)) {
+    throw new Error("One or more menu items are not linked to the live POS catalog. Refresh the menu and try again.");
+  }
+  const requestPayload = {
+    items: requestItems,
+    orderType: orderData.type,
+    table: orderData.type === "DINE-IN" ? String(orderData.table || "").trim() : "",
+    customerName: String(orderData.customerName || "").trim().slice(0,60),
+    customerMobile: String(orderData.customerMobile || "").replace(/\D/g, "").slice(0,10),
+    paymentMethod: String(orderData.paymentMethod || "Pay at Counter"),
+    specialNotes: String(orderData.specialNotes || "").trim().slice(0,200),
+    createdByUid: menuAuth.currentUser.uid,
+    status: "pending",
+    createdAt: menuFs.serverTimestamp()
+  };
+  const requestRef = await menuFs.addDoc(menuFs.collection(menuDb,"onlineOrderRequests"), requestPayload);
+  const result = await waitForOrderProcessing(requestRef.id);
+  return {...result, requestId:requestRef.id};
 }
 
 document.getElementById("checkoutBtn").addEventListener("click", async () => {
+  if (orderSubmitInProgress) return;
   const selectedType = orderTypeSelect.value;
   const isDineIn = selectedType === "DINE-IN";
   const tableNumber = isDineIn ? tableNumberInput.value.trim() : "N/A";
@@ -1974,6 +2043,7 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
     items: [...cart.values()].map(l => ({
       category: l.category,
       name: l.name,
+      menuItemId: l.menuItemId || "",
       ...(l.size ? { size: l.size } : {}),
       unitPrice: l.unitPrice,
       quantity: l.qty,
@@ -1987,15 +2057,19 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
     currency: "INR"
   };
 
+  orderSubmitInProgress = true;
+  refreshUI();
   try {
     const result = await submitOrderToPOS(orderData);
-    if (result && result.success === false) throw new Error("Order submission failed");
+    if (!result || result.status === "rejected" || result.status === "error" || result.status === "missing") {
+      throw new Error(result?.message || result?.reason || "The POS could not accept this order. Please contact the counter.");
+    }
 
     try {
       localStorage.setItem(CUSTOMER_STORAGE_KEY, JSON.stringify({ name: customerName, mobile: customerMobile }));
     } catch(e) {}
 
-    console.log("Order Placed Successfully:", JSON.stringify(orderData, null, 2));
+    console.log("Order submitted to Feeling Hungry POS:", {requestId: result.requestId, status: result.status});
     
     cart.clear();
     refreshUI();
@@ -2009,13 +2083,92 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
     document.getElementById("paymentMethod").value = "";
     document.getElementById("specialNotes").value = "";
 
-    showToast("Order placed successfully! Preparing your food.");
-    alert("Order Created (Demo Mode)!\n\n" + JSON.stringify(orderData, null, 2));
+    showToast(result.status === "accepted"
+      ? "Order sent to the POS and kitchen! Your KOT is being printed."
+      : "Order request received. The POS is finalizing it; please check with the counter.");
   } catch(err) {
     console.error(err);
-    showToast("Could not place order. Please try again.");
+    showToast(err?.message || "Could not place order. Please try again.");
+  } finally {
+    orderSubmitInProgress = false;
+    refreshUI();
   }
 });
+
+
+/* ==========================================================================
+   Shared Feeling Hungry Firebase catalog + customer order request connection
+   ========================================================================= */
+function setMenuConnectionStatus(message, isError=false) {
+  const el = document.getElementById("menuConnectionStatus");
+  if (el) {
+    el.textContent = message;
+    el.style.color = isError ? "#ff9b9b" : "#e9c46a";
+  }
+  refreshUI();
+}
+
+function groupsFromPublicMenu(snapshot) {
+  const groups = new Map();
+  snapshot.docs.forEach(docSnap => {
+    const item = {id:docSnap.id, ...(docSnap.data()||{})};
+    if (item.active === false || item.available === false || !String(item.name||"").trim()) return;
+    const category = String(item.cat || item.category || "Other").trim();
+    if (!groups.has(category)) groups.set(category, {category, emoji:MENU_CATEGORY_EMOJI[category]||"🍽️", pizza:false, items:[]});
+    groups.get(category).items.push([String(item.name).trim(), Number(item.price||0), docSnap.id]);
+  });
+  const oldOrder = MENU.map(group => group.category);
+  return [...groups.values()].map(group => {
+    group.items.sort((a,b)=>a[0].localeCompare(b[0]));
+    return group;
+  }).sort((a,b)=>{
+    const ai=oldOrder.indexOf(a.category), bi=oldOrder.indexOf(b.category);
+    if(ai<0&&bi<0) return a.category.localeCompare(b.category);
+    if(ai<0) return 1;
+    if(bi<0) return -1;
+    return ai-bi;
+  });
+}
+
+async function bootSharedFirebaseMenu() {
+  setMenuConnectionStatus("Connecting to the live Feeling Hungry menu…");
+  try {
+    const appSdk = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js");
+    menuFs = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+    const authSdk = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js");
+    const appName = "FeelingHungryDigitalMenu";
+    menuFirebaseApp = appSdk.getApps().find(app=>app.name===appName) || appSdk.initializeApp(FH_FIREBASE_CONFIG, appName);
+    menuDb = menuFs.getFirestore(menuFirebaseApp);
+    menuAuth = authSdk.getAuth(menuFirebaseApp);
+    if (!menuAuth.currentUser) await authSdk.signInAnonymously(menuAuth);
+    menuFirebaseReady = true;
+    if (publicMenuUnsubscribe) publicMenuUnsubscribe();
+    publicMenuUnsubscribe = menuFs.onSnapshot(menuFs.collection(menuDb,"digitalMenu"), snapshot => {
+      const liveGroups = groupsFromPublicMenu(snapshot);
+      if (!liveGroups.length) {
+        publicMenuReady = false;
+        setMenuConnectionStatus("Connected to Firebase. Waiting for the POS menu to sync…");
+        return;
+      }
+      MENU = liveGroups;
+      publicMenuReady = true;
+      renderMenu();
+      refreshUI();
+      setMenuConnectionStatus(`Live menu connected • ${liveGroups.reduce((n,g)=>n+g.items.length,0)} items synced from POS`);
+    }, error => {
+      console.error("Public menu listener error:", error);
+      publicMenuReady = false;
+      menuFirebaseError = error?.message || String(error);
+      setMenuConnectionStatus("Menu sync error: " + menuFirebaseError, true);
+    });
+  } catch (error) {
+    console.error("Digital Menu Firebase initialization failed:", error);
+    menuFirebaseError = error?.message || String(error);
+    menuFirebaseReady = false;
+    publicMenuReady = false;
+    setMenuConnectionStatus("Firebase connection failed: " + menuFirebaseError, true);
+  }
+}
 
 /* ==========================================================================
    Bootstrapping
@@ -2023,6 +2176,7 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
 window.addEventListener("DOMContentLoaded", () => {
   renderMenu();
   refreshUI();
+  bootSharedFirebaseMenu();
   initThreeHimalayanScene();
   animateThree();
 });
